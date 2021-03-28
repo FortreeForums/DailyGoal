@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phrases>
+  <phrase title="widget_def.ap_daily_goal_widget" version_id="1010000" version_string="1.1"><![CDATA[Daily goals]]></phrase>
+
   <phrase title="cron_entry.ap_count_posts_today" version_id="1010000" version_string="1.1"><![CDATA[[AP] Daily Goal: Count posts made today]]></phrase>
   <phrase title="cron_entry.ap_count_threads_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goal: Count threads made today]]></phrase>
   <phrase title="cron_entry.ap_count_members_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goal: Count members registered today]]></phrase>

@@ -27,7 +27,7 @@
 				<xf:if is="!$xf.options.ap_disable_thread_goal && $xf.visitor.hasPermission('general', 'ap_can_view_tgoal')">
 				<div style="padding-top:4px;">
 					{{ phrase('threads') }}
-					<xf:if is="$t >= $xf.options.ap_goal">
+					<xf:if is="$t >= $xf.options.ap_thread_goal">
 						<span style="float:right;"><span style="color:green;">{$t}</span>/{$xf.options.ap_thread_goal}</span>
 					<xf:else />
 						<span style="float:right;"><span style="color:red;">{$t}</span>/{$xf.options.ap_thread_goal}</span>
@@ -40,7 +40,7 @@
 				<xf:if is="!$xf.options.ap_disable_member_goal && $xf.visitor.hasPermission('general', 'ap_can_view_mgoal')">
 				<div style="padding-top:4px;">
 					{{ phrase('members') }}
-					<xf:if is="$m >= $xf.options.ap_goal">
+					<xf:if is="$m >= $xf.options.ap_member_goal">
 						<span style="float:right;"><span style="color:green;">{$m}</span>/{$xf.options.ap_member_goal}</span>
 					<xf:else />
 						<span style="float:right;"><span style="color:red;">{$m}</span>/{$xf.options.ap_member_goal}</span>

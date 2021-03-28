@@ -12,7 +12,7 @@ class Counter
 		$forums = $options->ap_post_goal_forums;
 		$forum_id = implode(",", $forums);
 
-		if(!$options->ap_disable_post_goal)
+		if(!$options->ap_disable_post_goal && !empty($forum_id))
 		{
 			$cache = $db->fetchOne('SELECT count(p.post_id) AS count 
 						FROM xf_post AS p
@@ -31,16 +31,15 @@ class Counter
 		$db = \XF::db();
 		$app = \XF::app();
 		$options = \XF::options();
-		$forums = $options->ap_post_goal_forums;
+		$forums = $options->ap_thread_goal_forums;
 		$forum_id = implode(",", $forums);
 
-		if(!$options->ap_disable_thread_goal)
+		if(!$options->ap_disable_thread_goal && !empty($forum_id))
 		{
-			$cache = $db->fetchOne('SELECT count(t.thread_id) AS threadCount
-						FROM xf_thread AS t
-						LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
+			$cache = $db->fetchOne('SELECT count(thread_id) AS threadCount
+						FROM xf_thread
 						WHERE DATE(FROM_UNIXTIME(post_date)) = CURDATE()
-                    				AND f.node_id IN ('.$forum_id.')');
+                    				AND node_id IN ('.$forum_id.')');
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['threadCount'] = $cache;
