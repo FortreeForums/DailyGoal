@@ -46,9 +46,4 @@
     <sub_options>*</sub_options>
     <relation group_id="ap_daily_goal" display_order="8"/>
   </option>
-
-  <option option_id="ap_goal_color" edit_format="textbox" data_type="string">
-    <default_value>#56124e</default_value>
-    <relation group_id="ap_daily_goal" display_order="9"/>
-  </option>
 </options>
