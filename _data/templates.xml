@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+ <template type="public" title="ap_daily_goal_widget" version_id="1020000" version_string="1.2"><![CDATA[<xf:if is="$xf.visitor.hasPermission('general', 'ap_can_view_daily_goal')">
+<div class="block" {{ widget_data($widget) }}>
+    <div class="block-container">
+        <h3 class="block-minorHeader">{{ phrase('ap_daily_goal') }}</h3>
+		<xf:set var="$p" value="{$xf.simpleCache.getSet('apathy/DailyGoal').count}" />
+		<xf:set var="$t" value="{$xf.simpleCache.getSet('apathy/DailyGoal').threadCount}" />
+		<xf:set var="$m" value="{$xf.simpleCache.getSet('apathy/DailyGoal').memberCount}" />
+		<xf:set var="$pp" value="{{ ($p / $xf.options.ap_goal) * 100 }}" />
+		<xf:set var="$tp" value="{{ ($t / $xf.options.ap_thread_goal) * 100 }}" />
+		<xf:set var="$mp" value="{{ ($m / $xf.options.ap_member_goal) * 100 }}" />
+		
+        <ul class="block-body">
+			<li class="block-row">
+				<xf:if is="!$xf.options.ap_disable_post_goal && $xf.visitor.hasPermission('general', 'ap_can_view_goal')">
+					{{ phrase('posts') }}
+					<xf:if is="$p >= $xf.options.ap_goal">
+						<span style="float:right;"><span style="color:green;">{$p}</span>/{$xf.options.ap_goal}</span>
+					<xf:else />
+						<span style="float:right;"><span style="color:red;">{$p}</span>/{$xf.options.ap_goal}</span>
+					</xf:if>
+					<div style="border:1px solid #000;width:230px;height:20px;position:absolute;"></div>
+					<div style="width:{$pp|number(2)}%;max-width:230px;height:20px;background:{$xf.options.ap_goal_color};z-index:0;"></div>
+				</xf:if>
+				
+				<xf:if is="!$xf.options.ap_disable_thread_goal && $xf.visitor.hasPermission('general', 'ap_can_view_tgoal')">
+				<div style="padding-top:4px;">
+					{{ phrase('threads') }}
+					<xf:if is="$t >= $xf.options.ap_goal">
+						<span style="float:right;"><span style="color:green;">{$t}</span>/{$xf.options.ap_thread_goal}</span>
+					<xf:else />
+						<span style="float:right;"><span style="color:red;">{$t}</span>/{$xf.options.ap_thread_goal}</span>
+					</xf:if>
+					<div style="border:1px solid #000;width:230px;height:20px;position:absolute;"></div>
+					<div style="width:{$tp|number(2)}%;max-width:230px;height:20px;background:{$xf.options.ap_goal_color};z-index:0;"></div>
+				</div>
+				</xf:if>
+				
+				<xf:if is="!$xf.options.ap_disable_member_goal && $xf.visitor.hasPermission('general', 'ap_can_view_mgoal')">
+				<div style="padding-top:4px;">
+					{{ phrase('members') }}
+					<xf:if is="$m >= $xf.options.ap_goal">
+						<span style="float:right;"><span style="color:green;">{$m}</span>/{$xf.options.ap_member_goal}</span>
+					<xf:else />
+						<span style="float:right;"><span style="color:red;">{$m}</span>/{$xf.options.ap_member_goal}</span>
+					</xf:if>
+					<div style="border:1px solid #000;width:230px;height:20px;position:absolute;"></div>
+					<div style="width:{$mp|number(2)}%;max-width:230px;height:20px;background:{$xf.options.ap_goal_color};z-index:0;"></div>
+				</div>
+				</xf:if>
+			</li>
+		</ul>
+    </div>
+</div>
+</xf:if>]]></template>
+</templates>

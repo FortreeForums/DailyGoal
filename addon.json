@@ -1,0 +1,14 @@
+{
+    "legacy_addon_id": "",
+    "title": "[AP] Daily Goal",
+    "description": "Adds a daily goal widget for posts, threads and members registrations.",
+    "version_id": 1020000,
+    "version_string": "1.2",
+    "dev": "apathy",
+    "dev_url": "https://fortreeforums.xyz",
+    "faq_url": "",
+    "support_url": "https://fortreeforums.xyz/threads/ap-daily-goal.1356/",
+    "extra_urls": [],
+    "require": [],
+    "icon": "icon.png"
+}

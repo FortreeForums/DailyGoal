@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="cron_entry.ap_count_posts_today" version_id="1010000" version_string="1.1"><![CDATA[[AP] Daily Goal: Count posts made today]]></phrase>
+  <phrase title="cron_entry.ap_count_threads_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goal: Count threads made today]]></phrase>
+  <phrase title="cron_entry.ap_count_members_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goal: Count members registered today]]></phrase>
+  <phrase title="cron_entry.ap_reset_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[[AP] Daily Goal: Reset counter at midnight]]></phrase>
+
+  <phrase title="option_group.ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[[AP] Daily Goal]]></phrase>
+  <phrase title="option_group_description.ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Configure the goal count for the Daily Goal addon by apathy]]></phrase>
+
+  <phrase title="option.ap_goal" version_id="1010000" version_string="1.1"><![CDATA[Post goal]]></phrase>
+  <phrase title="option_explain.ap_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Set your desired post goal here.]]></phrase>
+
+  <phrase title="option.ap_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Member registration goal]]></phrase>
+  <phrase title="option_explain.ap_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Set your desired member registration goal here.]]></phrase>
+
+  <phrase title="option.ap_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Thread goal]]></phrase>
+  <phrase title="option_explain.ap_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Set your desired thread goal here.]]></phrase>
+
+  <phrase title="option.ap_goal_color" version_id="1020000" version_string="1.2"><![CDATA[Progress bar color]]></phrase>
+  <phrase title="option_explain.ap_goal_color" version_id="1020000" version_string="1.2"><![CDATA[You can choose a color for the progress bar color here.]]></phrase>
+
+  <phrase title="option.ap_disable_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Member Goals]]></phrase>
+  <phrase title="option_explain.ap_disable_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable member registration goals.]]></phrase>
+
+  <phrase title="option.ap_disable_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Thread Goals]]></phrase>
+  <phrase title="option_explain.ap_disable_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable thread goals.]]></phrase>
+
+  <phrase title="option.ap_disable_post_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Post Goals]]></phrase>
+  <phrase title="option_explain.ap_disable_post_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable post goals.]]></phrase>
+
+  <phrase title="option.ap_post_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Applicable nodes for post goal]]></phrase>
+  <phrase title="option_explain.ap_post_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Select the boards you would like to count towards the post goal.]]></phrase>
+
+  <phrase title="option.ap_thread_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Applicable nodes for thread goal]]></phrase>
+  <phrase title="option_explain.ap_thread_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Select the boards you would like to count towards the thread goal.]]></phrase>
+
+  <phrase title="permission.general_ap_can_view_daily_goal" version_id="1020000" version_string="1.2"><![CDATA[View Daily Goal widget]]></phrase>
+  <phrase title="permission.general_ap_can_view_goal" version_id="1010000" version_string="1.1"><![CDATA[View post goal]]></phrase>
+  <phrase title="permission.general_ap_can_view_tgoal" version_id="1020000" version_string="1.2"><![CDATA[View thread goal]]></phrase>
+  <phrase title="permission.general_ap_can_view_mgoal" version_id="1020000" version_string="1.2"><![CDATA[View member registration goal]]></phrase>
+
+  <phrase title="ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Daily Goal]]></phrase>
+</phrases>
