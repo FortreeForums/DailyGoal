@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
- <template type="public" title="ap_daily_goal_widget" version_id="1020100" version_string="1.2.1"><![CDATA[<xf:if is="$xf.visitor.hasPermission('general', 'ap_can_view_daily_goal')">
+ <template type="public" title="ap_daily_goal_widget" version_id="1030000" version_string="1.3"><![CDATA[<xf:if is="$xf.visitor.hasPermission('general', 'ap_can_view_daily_goal')">
 <xf:css src="ap_progress_bar.less" />
 
 <div class="block block--progress" {{ widget_data($widget) }}>

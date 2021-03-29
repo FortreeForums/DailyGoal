@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phrases>
-  <phrase title="style_prop_group.ap_daily_goal" version_id="1020100" version_string="1.2.1"><![CDATA[[AP] Daily Goal]]></phrase>
-  <phrase title="style_prop_group_desc.ap_daily_goal" version_id="1020100" version_string="1.2.1"><![CDATA[Control settings related to the Daily Goal addon by apathy.]]></phrase>
+  <phrase title="style_prop_group.ap_daily_goal" version_id="1030000" version_string="1.3"><![CDATA[[AP] Daily Goal]]></phrase>
+  <phrase title="style_prop_group_desc.ap_daily_goal" version_id="1030000" version_string="1.3"><![CDATA[Control settings related to the Daily Goal addon by apathy.]]></phrase>
 
   <phrase title="widget_def.ap_daily_goal_widget" version_id="1020000" version_string="1.2"><![CDATA[Daily goals]]></phrase>
+  <phrase title="widget_def_desc.ap_daily_goal_widget" version_id="1030000" version_string="1.3"><![CDATA[Displays a block containing progress bars for daily post, thread & member registration counts.]]></phrase>
 
   <phrase title="cron_entry.ap_count_posts_today" version_id="1010000" version_string="1.1"><![CDATA[[AP] Daily Goal: Count posts made today]]></phrase>
   <phrase title="cron_entry.ap_count_threads_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goal: Count threads made today]]></phrase>
@@ -45,5 +46,5 @@
   <phrase title="permission.general_ap_can_view_tgoal" version_id="1020000" version_string="1.2"><![CDATA[View thread goal]]></phrase>
   <phrase title="permission.general_ap_can_view_mgoal" version_id="1020000" version_string="1.2"><![CDATA[View member registration goal]]></phrase>
 
-  <phrase title="ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Daily Goal]]></phrase>
+  <phrase title="ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Daily goals]]></phrase>
 </phrases>
