@@ -35,11 +35,11 @@
   <phrase title="option.ap_disable_post_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Post Goals]]></phrase>
   <phrase title="option_explain.ap_disable_post_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable post goals.]]></phrase>
 
-  <phrase title="option.ap_post_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Applicable nodes for post goal]]></phrase>
-  <phrase title="option_explain.ap_post_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Select the boards you would like to count towards the post goal.]]></phrase>
+  <phrase title="option.ap_post_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[Exclude nodes for post goal]]></phrase>
+  <phrase title="option_explain.ap_post_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[If you would like to exclude boards from the post goal, you can select them here.]]></phrase>
 
-  <phrase title="option.ap_thread_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Applicable nodes for thread goal]]></phrase>
-  <phrase title="option_explain.ap_thread_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Select the boards you would like to count towards the thread goal.]]></phrase>
+  <phrase title="option.ap_thread_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[Exclude nodes for thread goal]]></phrase>
+  <phrase title="option_explain.ap_thread_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[If you would like to exclude boards from the thread goal, you can select them here.]]></phrase>
 
   <phrase title="permission.general_ap_can_view_daily_goal" version_id="1020000" version_string="1.2"><![CDATA[View Daily Goals widget]]></phrase>
   <phrase title="permission.general_ap_can_view_goal" version_id="1010000" version_string="1.1"><![CDATA[View post goal]]></phrase>
