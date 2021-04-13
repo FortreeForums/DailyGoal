@@ -12,7 +12,7 @@
   <phrase title="cron_entry.ap_reset_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[[AP] Daily Goals: Reset counter at midnight]]></phrase>
 
   <phrase title="option_group.ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[[AP] Daily Goals]]></phrase>
-  <phrase title="option_group_description.ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Configure the goal count for the Daily Goal addon by apathy]]></phrase>
+  <phrase title="option_group_description.ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Configure the goal counts for the Daily Goals addon by apathy]]></phrase>
 
   <phrase title="option.ap_goal" version_id="1010000" version_string="1.1"><![CDATA[Post goal]]></phrase>
   <phrase title="option_explain.ap_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Set your desired post goal here.]]></phrase>
