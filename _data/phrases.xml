@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phrases>
-  <phrase title="style_prop_group.ap_daily_goal" version_id="1030000" version_string="1.3"><![CDATA[[AP] Daily Goal]]></phrase>
-  <phrase title="style_prop_group_desc.ap_daily_goal" version_id="1030000" version_string="1.3"><![CDATA[Control settings related to the Daily Goal addon by apathy.]]></phrase>
+  <phrase title="style_prop_group.ap_daily_goal" version_id="1030000" version_string="1.3"><![CDATA[[AP] Daily Goals]]></phrase>
+  <phrase title="style_prop_group_desc.ap_daily_goal" version_id="1030000" version_string="1.3"><![CDATA[Control settings related to the Daily Goals addon by apathy.]]></phrase>
 
   <phrase title="widget_def.ap_daily_goal_widget" version_id="1020000" version_string="1.2"><![CDATA[Daily goals]]></phrase>
   <phrase title="widget_def_desc.ap_daily_goal_widget" version_id="1030000" version_string="1.3"><![CDATA[Displays a block containing progress bars for daily post, thread & member registration counts.]]></phrase>
 
-  <phrase title="cron_entry.ap_count_posts_today" version_id="1010000" version_string="1.1"><![CDATA[[AP] Daily Goal: Count posts made today]]></phrase>
-  <phrase title="cron_entry.ap_count_threads_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goal: Count threads made today]]></phrase>
-  <phrase title="cron_entry.ap_count_members_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goal: Count members registered today]]></phrase>
-  <phrase title="cron_entry.ap_reset_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[[AP] Daily Goal: Reset counter at midnight]]></phrase>
+  <phrase title="cron_entry.ap_count_posts_today" version_id="1010000" version_string="1.1"><![CDATA[[AP] Daily Goals: Count posts made today]]></phrase>
+  <phrase title="cron_entry.ap_count_threads_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goals: Count threads made today]]></phrase>
+  <phrase title="cron_entry.ap_count_members_today" version_id="1020000" version_string="1.2"><![CDATA[[AP] Daily Goals: Count members registered today]]></phrase>
+  <phrase title="cron_entry.ap_reset_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[[AP] Daily Goals: Reset counter at midnight]]></phrase>
 
-  <phrase title="option_group.ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[[AP] Daily Goal]]></phrase>
+  <phrase title="option_group.ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[[AP] Daily Goals]]></phrase>
   <phrase title="option_group_description.ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Configure the goal count for the Daily Goal addon by apathy]]></phrase>
 
   <phrase title="option.ap_goal" version_id="1010000" version_string="1.1"><![CDATA[Post goal]]></phrase>
@@ -41,7 +41,7 @@
   <phrase title="option.ap_thread_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Applicable nodes for thread goal]]></phrase>
   <phrase title="option_explain.ap_thread_goal_forums" version_id="1020000" version_string="1.2"><![CDATA[Select the boards you would like to count towards the thread goal.]]></phrase>
 
-  <phrase title="permission.general_ap_can_view_daily_goal" version_id="1020000" version_string="1.2"><![CDATA[View Daily Goal widget]]></phrase>
+  <phrase title="permission.general_ap_can_view_daily_goal" version_id="1020000" version_string="1.2"><![CDATA[View Daily Goals widget]]></phrase>
   <phrase title="permission.general_ap_can_view_goal" version_id="1010000" version_string="1.1"><![CDATA[View post goal]]></phrase>
   <phrase title="permission.general_ap_can_view_tgoal" version_id="1020000" version_string="1.2"><![CDATA[View thread goal]]></phrase>
   <phrase title="permission.general_ap_can_view_mgoal" version_id="1020000" version_string="1.2"><![CDATA[View member registration goal]]></phrase>
