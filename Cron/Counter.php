@@ -12,7 +12,12 @@ class Counter
 		$forums = $options->ap_post_goal_forums;
 		$forum_id = implode(",", $forums);
 
-		if(!$options->ap_disable_post_goal && !empty($forum_id))
+		if(empty($forum_id))
+		{
+			$forum_id = '0';
+		}
+
+		if(!$options->ap_disable_post_goal)
 		{
 			$cache = $db->fetchOne('SELECT count(p.post_id) AS count 
 						FROM xf_post AS p
@@ -34,7 +39,12 @@ class Counter
 		$forums = $options->ap_thread_goal_forums;
 		$forum_id = implode(",", $forums);
 
-		if(!$options->ap_disable_thread_goal && !empty($forum_id))
+		if(empty($forum_id))
+		{
+			$forum_id = '0';
+		}
+
+		if(!$options->ap_disable_thread_goal)
 		{
 			$cache = $db->fetchOne('SELECT count(thread_id) AS threadCount
 						FROM xf_thread
