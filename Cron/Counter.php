@@ -19,7 +19,7 @@ class Counter
                     				LEFT JOIN xf_thread AS t ON (t.thread_id = p.thread_id)
                     				LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
 						WHERE DATE(FROM_UNIXTIME(p.post_date)) = CURDATE()
-                    				AND f.node_id IN ('.$forum_id.')');
+                    				AND f.node_id NOT IN ('.$forum_id.')');
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['count'] = $cache;
@@ -39,7 +39,7 @@ class Counter
 			$cache = $db->fetchOne('SELECT count(thread_id) AS threadCount
 						FROM xf_thread
 						WHERE DATE(FROM_UNIXTIME(post_date)) = CURDATE()
-                    				AND node_id IN ('.$forum_id.')');
+                    				AND node_id NOT IN ('.$forum_id.')');
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['threadCount'] = $cache;
