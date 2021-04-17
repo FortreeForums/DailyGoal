@@ -3,7 +3,6 @@
   <style_property property_name="ap_daily_goal_bar_bg" group_name="ap_daily_goal" title="Progress Bar Background" description="Change the background color for daily goal progress bars." property_type="value" value_type="color" display_order="1">
     <value>"@xf-paletteAccent1"</value>
   </style_property>
-
   <style_property property_name="ap_daily_goal_bar_color" group_name="ap_daily_goal" title="Progress Bar Color" description="Change the color for daily goal progress bars." property_type="value" value_type="color" display_order="1">
     <value>"@xf-paletteAccent2"</value>
   </style_property>

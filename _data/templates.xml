@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
- <template type="public" title="ap_daily_goal_widget" version_id="1030000" version_string="1.3"><![CDATA[<xf:if is="$xf.visitor.hasPermission('general', 'ap_can_view_daily_goal')">
+  <template type="public" title="ap_daily_goal_widget" version_id="1030200" version_string="1.3.2"><![CDATA[<xf:if is="$xf.visitor.hasPermission('general', 'ap_can_view_daily_goal')">
 <xf:css src="ap_progress_bar.less" />
 
 <div class="block block--progress" {{ widget_data($widget) }}>
@@ -18,13 +18,13 @@
 				<xf:if is="!$xf.options.ap_disable_post_goal && $xf.visitor.hasPermission('general', 'ap_can_view_goal')">
 					{{ phrase('posts') }}
 					<xf:if is="$p >= $xf.options.ap_goal">
-						<span style="float:right;"><span style="color:green;">{$p}</span>/{$xf.options.ap_goal}</span>
+						<span style="float:right;"><span style="color:green;">{{ $p ? $p : '0' }}</span>/{$xf.options.ap_goal}</span>
 					<xf:else />
-						<span style="float:right;"><span style="color:red;">{$p}</span>/{$xf.options.ap_goal}</span>
+						<span style="float:right;"><span style="color:red;">{{$p ? $p : '0' }}</span>/{$xf.options.ap_goal}</span>
 					</xf:if>
 					<div class="progress-bar">
-						<div class="progress-width" style="width: {$pp}%;">
-							<p class="progress-percent">{$pp}%</p>
+						<div class="progress-width" style="width: {$pp|number}%;">
+							<p class="progress-percent">{$pp|number}%</p>
 						</div>
 					</div>
 				</xf:if>
@@ -33,13 +33,13 @@
 				<div style="padding-top:4px;">
 					{{ phrase('threads') }}
 					<xf:if is="$t >= $xf.options.ap_thread_goal">
-						<span style="float:right;"><span style="color:green;">{$t}</span>/{$xf.options.ap_thread_goal}</span>
+						<span style="float:right;"><span style="color:green;">{{$t ? $t : '0' }}</span>/{$xf.options.ap_thread_goal}</span>
 					<xf:else />
-						<span style="float:right;"><span style="color:red;">{$t}</span>/{$xf.options.ap_thread_goal}</span>
+						<span style="float:right;"><span style="color:red;">{{$t ? $t : '0' }}</span>/{$xf.options.ap_thread_goal}</span>
 					</xf:if>
 					<div class="progress-bar">
-						<div class="progress-width" style="width: {$tp}%;">
-							<p class="progress-percent">{$tp}%</p>
+						<div class="progress-width" style="width: {$tp|number}%;">
+							<p class="progress-percent">{$tp|number}%</p>
 						</div>
 					</div>
 				</div>
@@ -49,13 +49,13 @@
 				<div style="padding-top:4px;">
 					{{ phrase('members') }}
 					<xf:if is="$m >= $xf.options.ap_member_goal">
-						<span style="float:right;"><span style="color:green;">{$m}</span>/{$xf.options.ap_member_goal}</span>
+						<span style="float:right;"><span style="color:green;">{{$m ? $m : '0' }}</span>/{$xf.options.ap_member_goal}</span>
 					<xf:else />
-						<span style="float:right;"><span style="color:red;">{$m}</span>/{$xf.options.ap_member_goal}</span>
+						<span style="float:right;"><span style="color:red;">{{$m ? $m : '0' }}</span>/{$xf.options.ap_member_goal}</span>
 					</xf:if>
 					<div class="progress-bar">
-						<div class="progress-width" style="width: {$mp}%;">
-							<p class="progress-percent">{$mp}%</p>
+						<div class="progress-width" style="width: {$mp|number}%;">
+							<p class="progress-percent">{$mp|number}%</p>
 						</div>
 					</div>
 				</div>
@@ -65,8 +65,7 @@
     </div>
 </div>
 </xf:if>]]></template>
-
- <template type="public" title="ap_progress_bar.less" version_id="1020100" version_string="1.2.1"><![CDATA[/* From Russ on Xenforo
+  <template type="public" title="ap_progress_bar.less" version_id="1030200" version_string="1.3.2"><![CDATA[/* From Russ on Xenforo
    https://xenforo.com/community/threads/does-this-add-on-exist-profile-progression.168788/#post-1368520 */
 
 .block--progress
@@ -97,6 +96,7 @@
         transform:translate(-50%,-50%);
         margin:0;
         color:white;
+        text-shadow: 0 0 1px #000000;
     }
     .progress-complete
     {
