@@ -1,5 +1,28 @@
 <?php
 
+//  ▄▄▄·  ▄▄▄· ▄▄▄· ▄▄▄▄▄ ▄ .▄ ▄· ▄▌
+// ▐█ ▀█ ▐█ ▄█▐█ ▀█ •██  ██▪▐█▐█▪██▌
+// ▄█▀▀█  ██▀·▄█▀▀█  ▐█.▪██▀▐█▐█▌▐█▪
+// ▐█ ▪▐▌▐█▪·•▐█ ▪▐▌ ▐█▌·██▌▐▀ ▐█▀·.
+//  ▀  ▀ .▀    ▀  ▀  ▀▀▀ ▀▀▀ ·  ▀ •
+//  https://fortreeforums.xyz
+//  Licensed under GPL-3.0-or-later 2021
+//
+//  This file is part of [AP] Daily Goals ("Daily Goals").
+//
+//  Daily Goals is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Daily Goals is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Daily Goals.  If not, see <https://www.gnu.org/licenses/>.
+
 namespace apathy\DailyGoal\Cron;
 
 class Counter
@@ -19,13 +42,34 @@ class Counter
 
 		if(!$options->ap_disable_post_goal)
 		{
-			$cache = $db->fetchOne('SELECT count(p.post_id) AS count 
+			$post = $db->fetchOne('SELECT count(p.post_id) AS count 
 						FROM xf_post AS p
                     				LEFT JOIN xf_thread AS t ON (t.thread_id = p.thread_id)
                     				LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
 						WHERE DATE(FROM_UNIXTIME(p.post_date)) = CURDATE()
-                    				AND f.node_id NOT IN ('.$forum_id.')');
-
+                    				AND f.node_id NOT IN (?)', [$forum_id]);
+                    				
+                    	/* Check if [UW] Forum Comments System is installed */
+                    	$addons = \XF::app()->container('addon.cache');
+                    	
+                    	if(array_key_exists('UW/FCS', $addons) 
+			&& $addons['UW/FCS'] >= 1
+			&& $options->ap_dailygoal_include_comments)
+			{                    				
+                    		$comment = $db->fetchOne('SELECT COUNT(c.comment_id) AS count
+                    					  FROM xf_uw_comment AS c
+                    					  LEFT JOIN xf_thread AS t ON (t.thread_id = c.thread_id)
+                    					  LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
+                    					  WHERE DATE(FROM_UNIXTIME(c.comment_date)) = CURDATE()
+                    					  AND f.node_id NOT IN (?)', [$forum_id]);
+                    				  
+                    		$cache = ($post + $comment);
+                    	}
+                    	else
+                    	{
+                    		$cache = $post;
+                    	}
+                    	
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['count'] = $cache;
 		}
@@ -49,7 +93,7 @@ class Counter
 			$cache = $db->fetchOne('SELECT count(thread_id) AS threadCount
 						FROM xf_thread
 						WHERE DATE(FROM_UNIXTIME(post_date)) = CURDATE()
-                    				AND node_id NOT IN ('.$forum_id.')');
+                    				AND node_id NOT IN (?)', [$forum_id]);
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['threadCount'] = $cache;

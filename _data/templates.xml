@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
-  <template type="public" title="ap_daily_goal_widget" version_id="1030200" version_string="1.3.2"><![CDATA[<xf:if is="$xf.visitor.hasPermission('general', 'ap_can_view_daily_goal')">
-<xf:css src="ap_progress_bar.less" />
+  <template type="public" title="ap_daily_goal_widget" version_id="1040070" version_string="1.4.0"><![CDATA[<xf:if is="$xf.visitor.hasPermission('general', 'ap_can_view_daily_goal')">
+<xf:css src="ap_dailygoals_progress_bar.less" />
 
 <div class="block block--progress" {{ widget_data($widget) }}>
     <div class="block-container">
@@ -23,9 +23,8 @@
 						<span style="float:right;"><span style="color:red;">{{$p ? $p : '0' }}</span>/{$xf.options.ap_goal}</span>
 					</xf:if>
 					<div class="progress-bar">
-						<div class="progress-width" style="width: {$pp|number}%;">
-							<p class="progress-percent">{$pp|number}%</p>
-						</div>
+						<div class="progress-width" style="width: {$pp|number}%;"></div>
+						<p class="progress-percent">{$pp|number}%</p>
 					</div>
 				</xf:if>
 				
@@ -38,9 +37,8 @@
 						<span style="float:right;"><span style="color:red;">{{$t ? $t : '0' }}</span>/{$xf.options.ap_thread_goal}</span>
 					</xf:if>
 					<div class="progress-bar">
-						<div class="progress-width" style="width: {$tp|number}%;">
-							<p class="progress-percent">{$tp|number}%</p>
-						</div>
+						<div class="progress-width" style="width: {$tp|number}%;"></div>
+						<p class="progress-percent">{$tp|number}%</p>
 					</div>
 				</div>
 				</xf:if>
@@ -54,9 +52,8 @@
 						<span style="float:right;"><span style="color:red;">{{$m ? $m : '0' }}</span>/{$xf.options.ap_member_goal}</span>
 					</xf:if>
 					<div class="progress-bar">
-						<div class="progress-width" style="width: {$mp|number}%;">
-							<p class="progress-percent">{$mp|number}%</p>
-						</div>
+						<div class="progress-width" style="width: {$mp|number}%;"></div>
+						<p class="progress-percent">{$mp|number}%</p>
 					</div>
 				</div>
 				</xf:if>
@@ -65,13 +62,14 @@
     </div>
 </div>
 </xf:if>]]></template>
-  <template type="public" title="ap_progress_bar.less" version_id="1030200" version_string="1.3.2"><![CDATA[/* From Russ on Xenforo
+  <template type="public" title="ap_dailygoals_progress_bar.less" version_id="1040070" version_string="1.4.0"><![CDATA[/* From Russ on Xenforo
    https://xenforo.com/community/threads/does-this-add-on-exist-profile-progression.168788/#post-1368520 */
 
 .block--progress
 {
     .progress-bar
     {
+		position: relative;
         margin-bottom: @xf-paddingLarge;
         width:100%;
         height:30px;
@@ -87,6 +85,7 @@
         background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.125) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.125) 50%, rgba(255, 255, 255, 0.125) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
         background-size: 35px 35px;
         background-color: {{ property('ap_daily_goal_bar_color') }} !important;
+		text-align: center;
     }
     .progress-percent
     {

@@ -5,6 +5,7 @@
   <phrase title="cron_entry.ap_count_posts_today" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals: Count posts made today]]></phrase>
   <phrase title="cron_entry.ap_count_threads_today" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals: Count threads made today]]></phrase>
   <phrase title="cron_entry.ap_reset_daily_goal" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals: Reset counter at midnight]]></phrase>
+  <phrase title="option.ap_dailygoal_include_comments" version_id="1040070" version_string="1.4.0"><![CDATA[Count comments towards Post Goal]]></phrase>
   <phrase title="option.ap_disable_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Member Goals]]></phrase>
   <phrase title="option.ap_disable_post_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Post Goals]]></phrase>
   <phrase title="option.ap_disable_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Thread Goals]]></phrase>
@@ -14,6 +15,7 @@
   <phrase title="option.ap_post_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[Exclude nodes for post goal]]></phrase>
   <phrase title="option.ap_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Thread goal]]></phrase>
   <phrase title="option.ap_thread_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[Exclude nodes for thread goal]]></phrase>
+  <phrase title="option_explain.ap_dailygoal_include_comments" version_id="1040070" version_string="1.4.0"><![CDATA[If you have <b>[UW] Forum Comments System</b> installed, you can choose to include comments towards the post goal.]]></phrase>
   <phrase title="option_explain.ap_disable_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable member registration goals.]]></phrase>
   <phrase title="option_explain.ap_disable_post_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable post goals.]]></phrase>
   <phrase title="option_explain.ap_disable_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable thread goals.]]></phrase>
