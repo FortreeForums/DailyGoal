@@ -19,13 +19,34 @@ class Counter
 
 		if(!$options->ap_disable_post_goal)
 		{
-			$cache = $db->fetchOne('SELECT count(p.post_id) AS count 
+			$post = $db->fetchOne('SELECT count(p.post_id) AS count 
 						FROM xf_post AS p
                     				LEFT JOIN xf_thread AS t ON (t.thread_id = p.thread_id)
                     				LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
 						WHERE DATE(FROM_UNIXTIME(p.post_date)) = CURDATE()
-                    				AND f.node_id NOT IN ('.$forum_id.')');
-
+                    				AND f.node_id NOT IN (?)', [$forum_id]);
+                    				
+                    	/* Check if [UW] Forum Comments System is installed */
+                    	$addons = \XF::app()->container('addon.cache');
+                    	
+                    	if(array_key_exists('UW/FCS', $addons) 
+			&& $addons['UW/FCS'] >= 1
+			&& $options->ap_dailygoal_include_comments)
+			{                    				
+                    		$comment = $db->fetchOne('SELECT COUNT(c.comment_id) AS count
+                    					  FROM xf_uw_comment AS c
+                    					  LEFT JOIN xf_thread AS t ON (t.thread_id = c.thread_id)
+                    					  LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
+                    					  WHERE DATE(FROM_UNIXTIME(c.comment_date)) = CURDATE()
+                    					  AND f.node_id NOT IN (?)', [$forum_id]);
+                    				  
+                    		$cache = ($post + $comment);
+                    	}
+                    	else
+                    	{
+                    		$cache = $post;
+                    	}
+                    	
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['count'] = $cache;
 		}
@@ -49,7 +70,7 @@ class Counter
 			$cache = $db->fetchOne('SELECT count(thread_id) AS threadCount
 						FROM xf_thread
 						WHERE DATE(FROM_UNIXTIME(post_date)) = CURDATE()
-                    				AND node_id NOT IN ('.$forum_id.')');
+                    				AND node_id NOT IN (?)', [$forum_id]);
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['threadCount'] = $cache;
