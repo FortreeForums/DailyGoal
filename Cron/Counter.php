@@ -32,7 +32,7 @@ class Counter
 		$db = \XF::db();
 		$app = \XF::app();
 		$options = \XF::options();
-		$forums = $options->ap_post_goal_forums;
+		$forums = $options->ap_dg_post_excluded_nodes;
 		$forum_id = implode(",", $forums);
 
 		if(empty($forum_id))
@@ -40,28 +40,28 @@ class Counter
 			$forum_id = '0';
 		}
 
-		if(!$options->ap_disable_post_goal)
+		if(!$options->ap_dg_disable_post_goal)
 		{
 			$post = $db->fetchOne('SELECT count(p.post_id) AS count 
-						FROM xf_post AS p
-                    				LEFT JOIN xf_thread AS t ON (t.thread_id = p.thread_id)
-                    				LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
-						WHERE DATE(FROM_UNIXTIME(p.post_date)) = CURDATE()
-                    				AND f.node_id NOT IN (?)', [$forum_id]);
+					FROM xf_post AS p
+                    			LEFT JOIN xf_thread AS t ON (t.thread_id = p.thread_id)
+                    			LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
+					WHERE DATE(FROM_UNIXTIME(p.post_date)) = CURDATE()
+                    			AND f.node_id NOT IN (?)', [$forum_id]);
                     				
                     	/* Check if [UW] Forum Comments System is installed */
                     	$addons = \XF::app()->container('addon.cache');
                     	
                     	if(array_key_exists('UW/FCS', $addons) 
 			&& $addons['UW/FCS'] >= 1
-			&& $options->ap_dailygoal_include_comments)
+			&& $options->ap_dg_include_comments)
 			{                    				
                     		$comment = $db->fetchOne('SELECT COUNT(c.comment_id) AS count
-                    					  FROM xf_uw_comment AS c
-                    					  LEFT JOIN xf_thread AS t ON (t.thread_id = c.thread_id)
-                    					  LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
-                    					  WHERE DATE(FROM_UNIXTIME(c.comment_date)) = CURDATE()
-                    					  AND f.node_id NOT IN (?)', [$forum_id]);
+                    			FROM xf_uw_comment AS c
+                    			LEFT JOIN xf_thread AS t ON (t.thread_id = c.thread_id)
+                    			LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
+                    			WHERE DATE(FROM_UNIXTIME(c.comment_date)) = CURDATE()
+                    			AND f.node_id NOT IN (?)', [$forum_id]);
                     				  
                     		$cache = ($post + $comment);
                     	}
@@ -80,7 +80,7 @@ class Counter
 		$db = \XF::db();
 		$app = \XF::app();
 		$options = \XF::options();
-		$forums = $options->ap_thread_goal_forums;
+		$forums = $options->ap_dg_thread_excluded_nodes;
 		$forum_id = implode(",", $forums);
 
 		if(empty($forum_id))
@@ -88,12 +88,12 @@ class Counter
 			$forum_id = '0';
 		}
 
-		if(!$options->ap_disable_thread_goal)
+		if(!$options->ap_dg_disable_thread_goal)
 		{
 			$cache = $db->fetchOne('SELECT count(thread_id) AS threadCount
-						FROM xf_thread
-						WHERE DATE(FROM_UNIXTIME(post_date)) = CURDATE()
-                    				AND node_id NOT IN (?)', [$forum_id]);
+					FROM xf_thread
+					WHERE DATE(FROM_UNIXTIME(post_date)) = CURDATE()
+                    			AND node_id NOT IN (?)', [$forum_id]);
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['threadCount'] = $cache;
@@ -106,11 +106,11 @@ class Counter
 		$app = \XF::app();
 		$options = \XF::options();
 
-		if(!$options->ap_disable_member_goal)
+		if(!$options->ap_dg_disable_member_goal)
 		{
 			$cache = $db->fetchOne('SELECT count(user_id) AS memberCount
-						FROM xf_user
-						WHERE DATE(FROM_UNIXTIME(register_date)) = CURDATE()');
+					FROM xf_user
+					WHERE DATE(FROM_UNIXTIME(register_date)) = CURDATE()');
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['memberCount'] = $cache;
@@ -120,20 +120,69 @@ class Counter
 	public static function resetCounterAtMidnight()
 	{
 		$app = \XF::app();
+		$db = \XF::db();
 		$options = \XF::options();
 
 		$simpleCache = $app->simpleCache();
 
 		if(!$options->ap_disable_post_goal)
 		{
+			// Submit the total to xf_stats_daily
+			$total = $simpleCache['apathy/DailyGoal']['count'];
+			
+			if($total >= $options->ap_dg_post_goal)
+			{
+				$fulfilled = 1;
+			}
+			else
+			{
+				$fulfilled = 0;
+			}
+			
+			$db->query('INSERT INTO xf_ap_daily_goal_history
+				    VALUES (?, ?, ?, ?)',
+				    [\XF::$time, 'post_goal', $total, $fulfilled]);
+				    
 			$simpleCache['apathy/DailyGoal']['count'] = 0;
 		}
 		if(!$options->ap_disable_thread_goal)
 		{
+			// Submit the total to xf_stats_daily
+			$total = $simpleCache['apathy/DailyGoal']['threadCount'];
+			
+			if($total >= $options->ap_dg_thread_goal)
+			{
+				$fulfilled = 1;
+			}
+			else
+			{
+				$fulfilled = 0;
+			}
+			
+			$db->query('INSERT INTO xf_ap_daily_goal_history
+				    VALUES (?, ?, ?, ?)',
+				    [\XF::$time, 'thread_goal', $total, $fulfilled]);
+				    
 			$simpleCache['apathy/DailyGoal']['threadCount'] = 0;
 		}
 		if(!$options->ap_disable_member_goal)
-		{
+		{			
+			// Submit the total to xf_stats_daily
+			$total = $simpleCache['apathy/DailyGoal']['memberCount'];
+			
+			if($total >= $options->ap_dg_member_goal)
+			{
+				$fulfilled = 1;
+			}
+			else
+			{
+				$fulfilled = 0;
+			}
+			
+			$db->query('INSERT INTO xf_ap_daily_goal_history
+				    VALUES (?, ?, ?, ?)',
+				    [\XF::$time, 'member_goal', $total, $fulfilled]);
+				    
 			$simpleCache['apathy/DailyGoal']['memberCount'] = 0;
 		}
 	}
