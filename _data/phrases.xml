@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phrases>
   <phrase title="ap_daily_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Daily goals]]></phrase>
+  <phrase title="ap_dg_count" version_id="1060070" version_string="1.6.0"><![CDATA[Count]]></phrase>
+  <phrase title="ap_dg_date_ended" version_id="1060070" version_string="1.6.0"><![CDATA[Date ended]]></phrase>
+  <phrase title="ap_dg_date_started" version_id="1060070" version_string="1.6.0"><![CDATA[Date started]]></phrase>
+  <phrase title="ap_dg_difference" version_id="1060070" version_string="1.6.0"><![CDATA[Difference]]></phrase>
+  <phrase title="ap_dg_fulfilled" version_id="1060070" version_string="1.6.0"><![CDATA[Fulfilled]]></phrase>
+  <phrase title="ap_dg_longest_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Longest streak]]></phrase>
+  <phrase title="ap_dg_ongoing" version_id="1060070" version_string="1.6.0"><![CDATA[Ongoing]]></phrase>
+  <phrase title="ap_dg_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Daily goals | Streaks]]></phrase>
+  <phrase title="ap_dg_view_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[View streaks]]></phrase>
+  <phrase title="ap_dg_viewing_goal_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Viewing daily goal streaks]]></phrase>
   <phrase title="cron_entry.ap_count_members_today" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals: Count members registered today]]></phrase>
   <phrase title="cron_entry.ap_count_posts_today" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals: Count posts made today]]></phrase>
   <phrase title="cron_entry.ap_count_threads_today" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals: Count threads made today]]></phrase>
   <phrase title="cron_entry.ap_reset_daily_goal" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals: Reset counter at midnight]]></phrase>
-  <phrase title="option.ap_dailygoal_include_comments" version_id="1040070" version_string="1.4.0"><![CDATA[Count comments towards Post Goal]]></phrase>
-  <phrase title="option.ap_disable_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Member Goals]]></phrase>
-  <phrase title="option.ap_disable_post_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Post Goals]]></phrase>
-  <phrase title="option.ap_disable_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Disable Thread Goals]]></phrase>
-  <phrase title="option.ap_goal" version_id="1010000" version_string="1.1"><![CDATA[Post goal]]></phrase>
+  <phrase title="option.apDgAutoAdjustTimeframeMembers" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust timeframe for members]]></phrase>
+  <phrase title="option.apDgAutoAdjustTimeframePosts" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust timeframe for posts]]></phrase>
+  <phrase title="option.apDgAutoAdjustTimeframeThreads" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust timeframe for threads]]></phrase>
+  <phrase title="option.apDgAutoAdjustWeightMembers" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust weight for members]]></phrase>
+  <phrase title="option.apDgAutoAdjustWeightPosts" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust weight for posts]]></phrase>
+  <phrase title="option.apDgAutoAdjustWeightThreads" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust weight for threads]]></phrase>
+  <phrase title="option.apDgDisableMemberGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Disable Member Goals]]></phrase>
+  <phrase title="option.apDgDisablePostGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Disable Post Goals]]></phrase>
+  <phrase title="option.apDgDisableThreadGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Disable Thread Goals]]></phrase>
+  <phrase title="option.apDgExcludedNodesPosts" version_id="1060070" version_string="1.6.0"><![CDATA[Exclude nodes for post goal]]></phrase>
+  <phrase title="option.apDgExcludedNodesThreads" version_id="1060070" version_string="1.6.0"><![CDATA[Exclude nodes for thread goal]]></phrase>
+  <phrase title="option.apDgIncludeComments" version_id="1060070" version_string="1.6.0"><![CDATA[Count comments towards Post Goal]]></phrase>
+  <phrase title="option.apDgMemberGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Member registration goal]]></phrase>
+  <phrase title="option.apDgPostGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Post goal]]></phrase>
+  <phrase title="option.apDgThreadGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Thread goal]]></phrase>
   <phrase title="option.ap_goal_color" version_id="1020000" version_string="1.2"><![CDATA[Progress bar color]]></phrase>
-  <phrase title="option.ap_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Member registration goal]]></phrase>
-  <phrase title="option.ap_post_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[Exclude nodes for post goal]]></phrase>
-  <phrase title="option.ap_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Thread goal]]></phrase>
-  <phrase title="option.ap_thread_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[Exclude nodes for thread goal]]></phrase>
-  <phrase title="option_explain.ap_dailygoal_include_comments" version_id="1040070" version_string="1.4.0"><![CDATA[If you have <b>[UW] Forum Comments System</b> installed, you can choose to include comments towards the post goal.]]></phrase>
-  <phrase title="option_explain.ap_disable_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable member registration goals.]]></phrase>
-  <phrase title="option_explain.ap_disable_post_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable post goals.]]></phrase>
-  <phrase title="option_explain.ap_disable_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Check this if you would like to disable thread goals.]]></phrase>
-  <phrase title="option_explain.ap_goal" version_id="1000000" version_string="1.0.0"><![CDATA[Set your desired post goal here.]]></phrase>
+  <phrase title="option_explain.apDgAutoAdjustTimeframeMembers" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the length of a streak needed to automatically increase or decrease the member goal.]]></phrase>
+  <phrase title="option_explain.apDgAutoAdjustTimeframePosts" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the length of a streak needed to automatically increase or decrease the post goal.]]></phrase>
+  <phrase title="option_explain.apDgAutoAdjustTimeframeThreads" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the length of a streak needed to automatically increase or decrease the threads goal.]]></phrase>
+  <phrase title="option_explain.apDgAutoAdjustWeightMembers" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the amount to automatically increase or decrease the member goal by, if the streak length set in the "Auto-adjust timeframe" option has been met]]></phrase>
+  <phrase title="option_explain.apDgAutoAdjustWeightPosts" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the amount to automatically increase or decrease the post goal by, if the streak length set in the "Auto-adjust timeframe" option has been met]]></phrase>
+  <phrase title="option_explain.apDgAutoAdjustWeightThreads" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the amount to automatically increase or decrease the thread goal by, if the streak length set in the "Auto-adjust timeframe" option has been met]]></phrase>
+  <phrase title="option_explain.apDgDisableMemberGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Check this if you would like to disable member registration goals.]]></phrase>
+  <phrase title="option_explain.apDgDisablePostGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Check this if you would like to disable post goals.]]></phrase>
+  <phrase title="option_explain.apDgDisableThreadGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Check this if you would like to disable thread goals.]]></phrase>
+  <phrase title="option_explain.apDgExcludedNodesPosts" version_id="1060070" version_string="1.6.0"><![CDATA[If you would like to exclude boards from the post goal, you can select them here.]]></phrase>
+  <phrase title="option_explain.apDgExcludedNodesThreads" version_id="1060070" version_string="1.6.0"><![CDATA[If you would like to exclude boards from the thread goal, you can select them here.]]></phrase>
+  <phrase title="option_explain.apDgIncludeComments" version_id="1060070" version_string="1.6.0"><![CDATA[If you have <b>[UW] Forum Comments System</b> installed, you can choose to include comments towards the post goal.]]></phrase>
+  <phrase title="option_explain.apDgMemberGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Set your desired member registration goal here.]]></phrase>
+  <phrase title="option_explain.apDgPostGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Set your desired post goal here.]]></phrase>
+  <phrase title="option_explain.apDgThreadGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Set your desired thread goal here.]]></phrase>
   <phrase title="option_explain.ap_goal_color" version_id="1020000" version_string="1.2"><![CDATA[You can choose a color for the progress bar color here.]]></phrase>
-  <phrase title="option_explain.ap_member_goal" version_id="1020000" version_string="1.2"><![CDATA[Set your desired member registration goal here.]]></phrase>
-  <phrase title="option_explain.ap_post_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[If you would like to exclude boards from the post goal, you can select them here.]]></phrase>
-  <phrase title="option_explain.ap_thread_goal" version_id="1020000" version_string="1.2"><![CDATA[Set your desired thread goal here.]]></phrase>
-  <phrase title="option_explain.ap_thread_goal_forums" version_id="1030100" version_string="1.3.1"><![CDATA[If you would like to exclude boards from the thread goal, you can select them here.]]></phrase>
   <phrase title="option_group.ap_daily_goal" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals]]></phrase>
   <phrase title="option_group_description.ap_daily_goal" version_id="1030100" version_string="1.3.1"><![CDATA[Configure the goal counts for the Daily Goals addon by apathy]]></phrase>
   <phrase title="permission.general_ap_can_view_daily_goal" version_id="1030100" version_string="1.3.1"><![CDATA[View Daily Goals widget]]></phrase>

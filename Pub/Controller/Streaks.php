@@ -38,7 +38,6 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 	{
 		$options = \XF::options();
 		$history = $this->finder('apathy\DailyGoal:History');
-		$repo = $this->repository('apathy\DailyGoal:Stats');
 		
 		$page = $this->filterPage();
 		$perPage = 15; // Maybe stop hardcoding this

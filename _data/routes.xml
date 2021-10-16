@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<routes/>
+<routes>
+  <route route_type="public" route_prefix="daily-goals" sub_name="streaks" controller="apathy\DailyGoal:Streaks"/>
+</routes>

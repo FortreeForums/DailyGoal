@@ -23,21 +23,27 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Daily Goals.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace apathy\DailyGoal\Widget;
+namespace apathy\DailyGoal\Entity;
 
-use XF\Widget\AbstractWidget;
+use XF\Mvc\Entity\Structure;
+use \XF\Mvc\Entity\Entity;
 
-class GoalCounters extends AbstractWidget
+class History extends Entity
 {
-    public function render()
-    {
-        $viewParams = [];
+	public static function getStructure(Structure $structure)
+	{
+		$structure->table = 'xf_ap_daily_goal_history';
+    		$structure->shortName = 'apathy\DailyGoal:History';
+    		$structure->primaryKey = 'date';
+    		$structure->columns = [
+        		'date' => ['type' => self::UINT, 'default' => \XF::$time],
+        		'stats_type' => ['type' => self::STR, 'maxLength' => 30, 'default' => false],
+			'counter' => ['type' => self::UINT, 'default' => 0],
+			'fulfilled' => ['type' => self::BOOL, 'default' => 0]
+    			];
+    		$structure->getters = [];
+    		$structure->relations = [];
 
-        return $this->renderer('ap_dg_widget', $viewParams);
-    }
-
-    public function getOptionsTemplate()
-    {
-	return '';
-    }
+    		return $structure;
+	}
 }
