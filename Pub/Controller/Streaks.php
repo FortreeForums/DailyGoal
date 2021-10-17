@@ -36,37 +36,13 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 	
 	public function actionIndex()
 	{
-		$options = $this->options();
+		$options = \XF::options();
 		$repo = $this->repository('apathy\DailyGoal:Streaks');
+		$visitor = \XF::visitor();
 		
-		if(!$options->apDgDisablePostGoal)
+		if(!$visitor->hasPermission('ap_dailygoals', 'ap_view_goal_streaks'))
 		{
-			$posts = $repo->findPostGoalHistory();
-			$longestPostStreak = $repo->calculateLongestStreak($posts);
-		}
-		else
-		{
-			$longestPostStreak = NULL;
-		}
-		
-		if(!$options->apDgDisableThreadGoal)
-		{
-			$threads = $repo->findThreadGoalHistory();
-			$longestThreadStreak = $repo->calculateLongestStreak($threads);
-		}
-		else
-		{
-			$longestThreadStreak = NULL;
-		}
-		
-		if(!$options->apDgDisableMemberGoal)
-		{
-			$members = $repo->findMemberGoalHistory();
-			$longestMemberStreak = $repo->calculateLongestStreak($members);
-		}
-		else
-		{
-			$longestMemberStreak = NULL;
+			return $this->noPermission();
 		}
 		
 		$page = $this->filterPage();
@@ -83,9 +59,6 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 		
 		$viewParams = [
 			'goal' => $history->limitByPage($page, $perPage)->fetch(),
-			'longestPostStreak' => $longestPostStreak,
-			'longestThreadStreak' => $longestThreadStreak,
-			'longestMemberStreak' => $longestMemberStreak,
 			'streakLengths' => $streakLengths,
 			'streakTypes' => $streakTypes,
 			'page' => $page,
@@ -99,7 +72,7 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 	protected function drawStreakGraph($entity)
 	{
 		$streak = 0;
-		$options = $this->options();
+		$options = \XF::options();
 		
 		foreach($entity as $goal)
 		{
