@@ -147,40 +147,43 @@ class Counter
 				    
 			$simpleCache['apathy/DailyGoal']['count'] = 0;
 			
-			// Auto-adjust goal if needed
-			$postTimeframe = $options->apDgAutoAdjustTimeframePosts;
-			$postWeight = $options->apDgAutoAdjustWeightPosts;
+			if(!$options->apDgDiableAutoAdjustment)
+			{			
+				// Auto-adjust goal if needed
+				$postTimeframe = $options->apDgAutoAdjustTimeframePosts;
+				$postWeight = $options->apDgAutoAdjustWeightPosts;
 			
-			$postFinder = \XF::finder('apathy\DailyGoal:History');
-			$postResult = $postFinder->where('stats_type', 'post_goal')->fetch();
+				$postFinder = \XF::finder('apathy\DailyGoal:History');
+				$postResult = $postFinder->where('stats_type', 'post_goal')->fetch();
 			
-			$streak = 0;
+				$streak = 0;
 			
-			foreach($postResult as $goal)
-			{
-				if($goal['fulfilled'] == 1)
+				foreach($postResult as $goal)
 				{
-					$streak++;
-				}
+					if($goal['fulfilled'] == 1)
+					{
+						$streak++;
+					}
 				
-				if($goal['fulfilled'] == 0)
+					if($goal['fulfilled'] == 0)
+					{
+						$streak = 0;
+					}
+				}
+			
+				$option = \XF::em()->find('XF:Option', 'apDgPostGoal');
+				
+				if($streak >= $postTimeframe)
 				{
-					$streak = 0;
+					$option->option_value = ( $options->apDgPostGoal + $postWeight );
 				}
-			}
+				elseif($streak <= $postTimeframe)
+				{
+					$option->option_value = ( $options->apDgPostGoal - $postWeight );
+				}
 			
-			$option = \XF::em()->find('XF:Option', 'apDgPostGoal');
-				
-			if($streak >= $postTimeframe)
-			{
-				$option->option_value = ( $options->apDgPostGoal + $postWeight );
+				$option->save();
 			}
-			elseif($streak <= $postTimeframe)
-			{
-				$option->option_value = ( $options->apDgPostGoal - $postWeight );
-			}
-			
-			$option->save();
 		}
 		
 		if(!$options->apDgDisableThreadGoal)
@@ -205,40 +208,43 @@ class Counter
 				    
 			$simpleCache['apathy/DailyGoal']['threadCount'] = 0;
 			
-			// Auto-adjust goal if needed
-			$threadTimeframe = $options->apDgAutoAdjustTimeframeThreads;
-			$threadWeight = $options->apDgAutoAdjustWeightThreads;
-			
-			$threadFinder = \XF::finder('apathy\DailyGoal:History');
-			$threadResult = $threadFinder->where('stats_type', 'thread_goal')->fetch();
-			
-			$streak = 0;
-			
-			foreach($threadResult as $goal)
+			if(!$options->apDgDiableAutoAdjustment)
 			{
-				if($goal['fulfilled'] == 1)
-				{
-					$streak++;
-				}
+				// Auto-adjust goal if needed
+				$threadTimeframe = $options->apDgAutoAdjustTimeframeThreads;
+				$threadWeight = $options->apDgAutoAdjustWeightThreads;
 				
-				if($goal['fulfilled'] == 0)
+				$threadFinder = \XF::finder('apathy\DailyGoal:History');
+				$threadResult = $threadFinder->where('stats_type', 'thread_goal')->fetch();
+			
+				$streak = 0;
+
+				foreach($threadResult as $goal)
 				{
-					$streak = 0;
-				}
-			}
-			
-			$option = \XF::em()->find('XF:Option', 'apDgThreadGoal');
+					if($goal['fulfilled'] == 1)
+					{
+						$streak++;
+					}
 				
-			if($streak >= $threadTimeframe)
-			{
-				$option->option_value = ( $options->apDgThreadGoal + $threadWeight );
-			}
-			elseif($streak <= $threadTimeframe)
-			{
-				$option->option_value = ( $options->apDgThreadGoal - $threadWeight );
-			}
+					if($goal['fulfilled'] == 0)
+					{
+						$streak = 0;
+					}
+				}
 			
-			$option->save();
+				$option = \XF::em()->find('XF:Option', 'apDgThreadGoal');
+				
+				if($streak >= $threadTimeframe)
+				{
+					$option->option_value = ( $options->apDgThreadGoal + $threadWeight );
+				}
+				elseif($streak <= $threadTimeframe)
+				{
+					$option->option_value = ( $options->apDgThreadGoal - $threadWeight );
+				}
+			
+				$option->save();
+			}
 		}
 		
 		if(!$options->apDgDisableMemberGoal)
@@ -263,40 +269,43 @@ class Counter
 				    
 			$simpleCache['apathy/DailyGoal']['memberCount'] = 0;
 			
-			// Auto-adjust goal if needed
-			$memberTimeframe = $options->apDgAutoAdjustTimeframeMembers;
-			$memberWeight = $options->apDgAutoAdjustWeightMembers;
-			
-			$memberFinder = \XF::finder('apathy\DailyGoal:History');
-			$memberResult = $memberFinder->where('stats_type', 'member_goal')->fetch();
-			
-			$streak = 0;
-			
-			foreach($memberResult as $goal)
+			if(!$options->apDgDiableAutoAdjustment)
 			{
-				if($goal['fulfilled'] == 1)
+				// Auto-adjust goal if needed
+				$memberTimeframe = $options->apDgAutoAdjustTimeframeMembers;
+				$memberWeight = $options->apDgAutoAdjustWeightMembers;
+			
+				$memberFinder = \XF::finder('apathy\DailyGoal:History');
+				$memberResult = $memberFinder->where('stats_type', 'member_goal')->fetch();
+			
+				$streak = 0;
+			
+				foreach($memberResult as $goal)
 				{
-					$streak++;
-				}
+					if($goal['fulfilled'] == 1)
+					{
+						$streak++;
+					}
 				
-				if($goal['fulfilled'] == 0)
+					if($goal['fulfilled'] == 0)
+					{
+						$streak = 0;
+					}
+				}
+			
+				$option = \XF::em()->find('XF:Option', 'apDgMemberGoal');
+				
+				if($streak >= $memberTimeframe)
 				{
-					$streak = 0;
+					$option->option_value = ( $options->apDgMemberGoal + $memberWeight );
 				}
-			}
+				elseif($streak <= $memberTimeframe)
+				{
+					$option->option_value = ( $options->apDgMemberGoal - $memberWeight );
+				}
 			
-			$option = \XF::em()->find('XF:Option', 'apDgMemberGoal');
-				
-			if($streak >= $memberTimeframe)
-			{
-				$option->option_value = ( $options->apDgMemberGoal + $memberWeight );
+				$option->save();
 			}
-			elseif($streak <= $memberTimeframe)
-			{
-				$option->option_value = ( $options->apDgMemberGoal - $memberWeight );
-			}
-			
-			$option->save();
 		}
 	}
 }
