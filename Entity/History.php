@@ -39,6 +39,7 @@ class History extends Entity
         		'date' => ['type' => self::UINT, 'default' => \XF::$time],
         		'stats_type' => ['type' => self::STR, 'maxLength' => 30, 'default' => false],
 			'counter' => ['type' => self::UINT, 'default' => 0],
+			'goal' => ['type' => self::UINT, 'default' => 0],
 			'fulfilled' => ['type' => self::BOOL, 'default' => 0]
     			];
     		$structure->getters = [];
