@@ -139,9 +139,11 @@ class Counter
 				$fulfilled = 0;
 			}
 			
+			$goal = $options->apDgPostGoal;
+			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
-				    VALUES (?, ?, ?, ?)',
-				    [\XF::$time, 'post_goal', $total, $fulfilled]);
+				    VALUES (?, ?, ?, ?, ?)',
+				    [\XF::$time, 'post_goal', $total, $goal, $fulfilled]);
 				    
 			$simpleCache['apathy/DailyGoal']['count'] = 0;
 			
@@ -194,9 +196,11 @@ class Counter
 				$fulfilled = 0;
 			}
 			
+			$goal = $options->apDgThreadGoal;
+			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
-				    VALUES (?, ?, ?, ?)',
-				    [\XF::$time, 'thread_goal', $total, $fulfilled]);
+				    VALUES (?, ?, ?, ?, ?)',
+				    [\XF::$time, 'thread_goal', $total, $goal, $fulfilled]);
 				    
 			$simpleCache['apathy/DailyGoal']['threadCount'] = 0;
 			
@@ -204,14 +208,15 @@ class Counter
 			$timeframe = $options->apDgAutoAdjustTimeframeThreads;
 			$weight = $options->apDgAutoAdjustWeightThreads;
 			
-			$entity = \XF::finder('apathy\DailyGoal:History')->fetch();
+			$entity2 = \XF::finder('apathy\DailyGoal:History')->fetch();
 			
 			$streak = 0;
 			
-			foreach($entity as $goal)
+			foreach($entity2 as $goal)
 			{
 				if($goal['stats_type'] == 'thread_goal' && $goal['fulfilled'] == 1)
 				{
+					dump($goal);
 					$streak++;
 				}
 				
@@ -249,9 +254,11 @@ class Counter
 				$fulfilled = 0;
 			}
 			
+			$goal = $options->apDgMemberGoal;
+			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
-				    VALUES (?, ?, ?, ?)',
-				    [\XF::$time, 'member_goal', $total, $fulfilled]);
+				    VALUES (?, ?, ?, ?, ?)',
+				    [\XF::$time, 'member_goal', $total, $goal, $fulfilled]);
 				    
 			$simpleCache['apathy/DailyGoal']['memberCount'] = 0;
 			
