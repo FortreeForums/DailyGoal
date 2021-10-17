@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style_properties>
-  <style_property property_name="ap_daily_goal_bar_bg" group_name="ap_daily_goal" title="Progress Bar Background" description="Change the background color for daily goal progress bars." property_type="value" value_type="color" display_order="1">
+  <style_property property_name="apDgBarBg" group_name="ap_daily_goals" title="Progress bar background" description="Change the background color for the goal progress bars" property_type="value" value_type="color" display_order="1">
     <value>"@xf-paletteAccent1"</value>
   </style_property>
-  <style_property property_name="ap_daily_goal_bar_color" group_name="ap_daily_goal" title="Progress Bar Color" description="Change the color for daily goal progress bars." property_type="value" value_type="color" display_order="1">
+  <style_property property_name="apDgBarColor" group_name="ap_daily_goals" title="Progress bar color" description="Change the color of the goal progress bars" property_type="value" value_type="color" display_order="1">
     <value>"@xf-paletteAccent2"</value>
+  </style_property>
+  <style_property property_name="apDgGraphGrid" group_name="ap_daily_goals" title="Streak graph grid color" property_type="value" value_type="color" display_order="3">
+    <value>"@xf-textColorMuted"</value>
+  </style_property>
+  <style_property property_name="apDgGraphLineMembers" group_name="ap_daily_goals" title="Streak graph member color" description="The color of the line representing member goals on the streak graph" property_type="value" value_type="color" display_order="6">
+    <value>"@xf-borderColorAccentContent"</value>
+  </style_property>
+  <style_property property_name="apDgGraphLinePosts" group_name="ap_daily_goals" title="Streak graph post color" description="The color of the line representing post goals on the streak graph" property_type="value" value_type="color" display_order="4">
+    <value>"@xf-borderColorHighlight"</value>
+  </style_property>
+  <style_property property_name="apDgGraphLineThreads" group_name="ap_daily_goals" title="Streak graph thread color" description="The color of the line representing thread goals on the streak graph" property_type="value" value_type="color" display_order="5">
+    <value>"@xf-borderColorFeature"</value>
   </style_property>
 </style_properties>

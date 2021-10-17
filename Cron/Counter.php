@@ -142,27 +142,28 @@ class Counter
 			$goal = $options->apDgPostGoal;
 			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
-				    VALUES (?, ?, ?, ?, ?)',
-				    [\XF::$time, 'post_goal', $total, $goal, $fulfilled]);
+				    VALUES (?, ?, ?, ?, ?, ?)',
+				    [NULL, \XF::$time, 'post_goal', $total, $goal, $fulfilled]);
 				    
 			$simpleCache['apathy/DailyGoal']['count'] = 0;
 			
 			// Auto-adjust goal if needed
-			$timeframe = $options->apDgAutoAdjustTimeframePosts;
-			$weight = $options->apDgAutoAdjustWeightPosts;
+			$postTimeframe = $options->apDgAutoAdjustTimeframePosts;
+			$postWeight = $options->apDgAutoAdjustWeightPosts;
 			
-			$entity = \XF::finder('apathy\DailyGoal:History')->fetch();
+			$postFinder = \XF::finder('apathy\DailyGoal:History');
+			$postResult = $postFinder->where('stats_type', 'post_goal')->fetch();
 			
 			$streak = 0;
 			
-			foreach($entity as $goal)
+			foreach($postResult as $goal)
 			{
-				if($goal['stats_type'] == 'post_goal' && $goal['fulfilled'] == 1)
+				if($goal['fulfilled'] == 1)
 				{
 					$streak++;
 				}
 				
-				if($goal['stats_type'] == 'post_goal' && $goal['fulfilled'] == 0)
+				if($goal['fulfilled'] == 0)
 				{
 					$streak = 0;
 				}
@@ -170,13 +171,13 @@ class Counter
 			
 			$option = \XF::em()->find('XF:Option', 'apDgPostGoal');
 				
-			if($streak >= $timeframe)
+			if($streak >= $postTimeframe)
 			{
-				$option->option_value = ( $options->apDgPostGoal + $weight );
+				$option->option_value = ( $options->apDgPostGoal + $postWeight );
 			}
-			elseif($streak <= $timeframe)
+			elseif($streak <= $postTimeframe)
 			{
-				$option->option_value = ( $options->apDgPostGoal - $weight );
+				$option->option_value = ( $options->apDgPostGoal - $postWeight );
 			}
 			
 			$option->save();
@@ -199,28 +200,28 @@ class Counter
 			$goal = $options->apDgThreadGoal;
 			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
-				    VALUES (?, ?, ?, ?, ?)',
-				    [\XF::$time, 'thread_goal', $total, $goal, $fulfilled]);
+				    VALUES (?, ?, ?, ?, ?, ?)',
+				    [NULL, \XF::$time, 'thread_goal', $total, $goal, $fulfilled]);
 				    
 			$simpleCache['apathy/DailyGoal']['threadCount'] = 0;
 			
 			// Auto-adjust goal if needed
-			$timeframe = $options->apDgAutoAdjustTimeframeThreads;
-			$weight = $options->apDgAutoAdjustWeightThreads;
+			$threadTimeframe = $options->apDgAutoAdjustTimeframeThreads;
+			$threadWeight = $options->apDgAutoAdjustWeightThreads;
 			
-			$entity2 = \XF::finder('apathy\DailyGoal:History')->fetch();
+			$threadFinder = \XF::finder('apathy\DailyGoal:History');
+			$threadResult = $threadFinder->where('stats_type', 'thread_goal')->fetch();
 			
 			$streak = 0;
 			
-			foreach($entity2 as $goal)
+			foreach($threadResult as $goal)
 			{
-				if($goal['stats_type'] == 'thread_goal' && $goal['fulfilled'] == 1)
+				if($goal['fulfilled'] == 1)
 				{
-					dump($goal);
 					$streak++;
 				}
 				
-				if($goal['stats_type'] == 'thread_goal' && $goal['fulfilled'] == 0)
+				if($goal['fulfilled'] == 0)
 				{
 					$streak = 0;
 				}
@@ -228,13 +229,13 @@ class Counter
 			
 			$option = \XF::em()->find('XF:Option', 'apDgThreadGoal');
 				
-			if($streak >= $timeframe)
+			if($streak >= $threadTimeframe)
 			{
-				$option->option_value = ( $options->apDgThreadGoal + $weight );
+				$option->option_value = ( $options->apDgThreadGoal + $threadWeight );
 			}
-			elseif($streak <= $timeframe)
+			elseif($streak <= $threadTimeframe)
 			{
-				$option->option_value = ( $options->apDgThreadGoal - $weight );
+				$option->option_value = ( $options->apDgThreadGoal - $threadWeight );
 			}
 			
 			$option->save();
@@ -257,27 +258,28 @@ class Counter
 			$goal = $options->apDgMemberGoal;
 			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
-				    VALUES (?, ?, ?, ?, ?)',
-				    [\XF::$time, 'member_goal', $total, $goal, $fulfilled]);
+				    VALUES (?, ?, ?, ?, ?, ?)',
+				    [NULL, \XF::$time, 'member_goal', $total, $goal, $fulfilled]);
 				    
 			$simpleCache['apathy/DailyGoal']['memberCount'] = 0;
 			
 			// Auto-adjust goal if needed
-			$timeframe = $options->apDgAutoAdjustTimeframeMembers;
-			$weight = $options->apDgAutoAdjustWeightMembers;
+			$memberTimeframe = $options->apDgAutoAdjustTimeframeMembers;
+			$memberWeight = $options->apDgAutoAdjustWeightMembers;
 			
-			$entity = \XF::finder('apathy\DailyGoal:History')->fetch();
+			$memberFinder = \XF::finder('apathy\DailyGoal:History');
+			$memberResult = $memberFinder->where('stats_type', 'member_goal')->fetch();
 			
 			$streak = 0;
 			
-			foreach($entity as $goal)
+			foreach($memberResult as $goal)
 			{
-				if($goal['stats_type'] == 'member_goal' && $goal['fulfilled'] == 1)
+				if($goal['fulfilled'] == 1)
 				{
 					$streak++;
 				}
 				
-				if($goal['stats_type'] == 'member_goal' && $goal['fulfilled'] == 0)
+				if($goal['fulfilled'] == 0)
 				{
 					$streak = 0;
 				}
@@ -285,13 +287,13 @@ class Counter
 			
 			$option = \XF::em()->find('XF:Option', 'apDgMemberGoal');
 				
-			if($streak >= $timeframe)
+			if($streak >= $memberTimeframe)
 			{
-				$option->option_value = ( $options->apDgMemberGoal + $weight );
+				$option->option_value = ( $options->apDgMemberGoal + $memberWeight );
 			}
-			elseif($streak <= $timeframe)
+			elseif($streak <= $memberTimeframe)
 			{
-				$option->option_value = ( $options->apDgMemberGoal - $weight );
+				$option->option_value = ( $options->apDgMemberGoal - $memberWeight );
 			}
 			
 			$option->save();

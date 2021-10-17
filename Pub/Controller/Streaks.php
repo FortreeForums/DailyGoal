@@ -36,17 +36,58 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 	
 	public function actionIndex()
 	{
-		$options = \XF::options();
-		$history = $this->finder('apathy\DailyGoal:History');
+		$options = $this->options();
+		$repo = $this->repository('apathy\DailyGoal:Streaks');
+		
+		if(!$options->apDgDisablePostGoal)
+		{
+			$posts = $repo->findPostGoalHistory();
+			$longestPostStreak = $repo->calculateLongestStreak($posts);
+		}
+		else
+		{
+			$longestPostStreak = NULL;
+		}
+		
+		if(!$options->apDgDisableThreadGoal)
+		{
+			$threads = $repo->findThreadGoalHistory();
+			$longestThreadStreak = $repo->calculateLongestStreak($threads);
+		}
+		else
+		{
+			$longestThreadStreak = NULL;
+		}
+		
+		if(!$options->apDgDisableMemberGoal)
+		{
+			$members = $repo->findMemberGoalHistory();
+			$longestMemberStreak = $repo->calculateLongestStreak($members);
+		}
+		else
+		{
+			$longestMemberStreak = NULL;
+		}
 		
 		$page = $this->filterPage();
-		$perPage = 15; // Maybe stop hardcoding this
+		$perPage = $options->apDgStreakPageLimit;
 		
-		//$this->calculateStreakLengths($history);
+		$history = $this->finder('apathy\DailyGoal:History');
+		$streakLengths = $this->drawStreakGraph($history->fetch());
+		
+		$streakTypes = [
+			'post' => 'Post streak',
+			'thread' => 'Thread streak',
+			'member' => 'Member streak'
+		];
 		
 		$viewParams = [
-			'goal' => $history->fetch(),
-			'longestStreak' => $this->calculateLongestStreak($history),
+			'goal' => $history->limitByPage($page, $perPage)->fetch(),
+			'longestPostStreak' => $longestPostStreak,
+			'longestThreadStreak' => $longestThreadStreak,
+			'longestMemberStreak' => $longestMemberStreak,
+			'streakLengths' => $streakLengths,
+			'streakTypes' => $streakTypes,
 			'page' => $page,
 			'perPage' => $perPage,
 			'total' => $history->total()
@@ -55,35 +96,53 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 		return $this->view('apathy\DailyGoal:Streaks', 'ap_dg_streaks', $viewParams);
 	}
 	
-	protected function calculateLongestStreak($entity)
-	{	
+	protected function drawStreakGraph($entity)
+	{
 		$streak = 0;
-		$longest['count'] = 0;
+		$options = $this->options();
 		
 		foreach($entity as $goal)
 		{
+			$date = date('Y-m-d', $goal['date']);
+			
 			if($goal['fulfilled'] == 1)
 			{
-				if($streak == 0)
-				{
-					$longest['startDate'] = $goal['date'];
-				}
-				
 				$streak++;
 			}
-			
-			if($streak > $longest['count'])
+			elseif($goal['fulfilled'] == 0)
 			{
-				$longest['count'] = $streak;
-				$longest['endDate'] = $goal['date'];
+				$streak = 0;
 			}
+			
+			if($goal['stats_type'] == 'post_goal'
+			&& !$options->apDgDisablePostGoal)
+			{
+				$values['post'] = $streak;
+				$averages['post'] = $streak;
+			}
+			if($goal['stats_type'] == 'thread_goal'
+			&& !$options->apDgDisableThreadGoal)
+			{
+				$values['thread'] = $streak;
+				$averages['thread'] = $streak;
+			}
+			if($goal['stats_type'] == 'member_goal'
+			&& !$options->apDgDisableMemberGoal)
+			{
+				$values['member'] = $streak;
+				$averages['member'] = $streak;
+			}
+			
+			$streaks[$date] = [
+				'ts' => $goal['date'],
+				'label' => date('M j, Y', $goal['date']),
+				'days' => 1,
+				'count' => 1,
+				'values' => $values,
+				'averages' => $averages,
+			];
 		}
 		
-		return $longest;
-	}
-	
-	protected function calculateStreakLengths($entity)
-	{
-		// Do stuff
+		return $streaks;
 	}
 }

@@ -23,29 +23,61 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Daily Goals.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace apathy\DailyGoal\Entity;
+namespace apathy\DailyGoal\Repository;
 
-use XF\Mvc\Entity\Structure;
-use \XF\Mvc\Entity\Entity;
+use XF\Mvc\Entity\Finder;
+use XF\Mvc\Entity\Repository;
 
-class History extends Entity
+class Streaks extends Repository
 {
-	public static function getStructure(Structure $structure)
+	public function findPostGoalHistory()
 	{
-		$structure->table = 'xf_ap_daily_goal_history';
-    		$structure->shortName = 'apathy\DailyGoal:History';
-    		$structure->primaryKey = 'goal_id';
-    		$structure->columns = [
-    			'goal_id' => ['type' => self::UINT, 'autoIncrement' => true, 'nullable' => true],
-        		'date' => ['type' => self::UINT, 'default' => \XF::$time],
-        		'stats_type' => ['type' => self::STR, 'maxLength' => 30, 'default' => false],
-			'counter' => ['type' => self::UINT, 'default' => 0],
-			'goal' => ['type' => self::UINT, 'default' => 0],
-			'fulfilled' => ['type' => self::BOOL, 'default' => 0]
-    			];
-    		$structure->getters = [];
-    		$structure->relations = [];
-
-    		return $structure;
+		$finder = $this->finder('apathy\DailyGoal:History');
+		$result = $finder->where('stats_type', 'post_goal')->fetch();
+		
+		return $result;
+	}
+	
+	public function findThreadGoalHistory()
+	{
+		$finder = $this->finder('apathy\DailyGoal:History');
+		$result = $finder->where('stats_type', 'thread_goal')->fetch();
+		
+		return $result;
+	}
+	
+	public function findMemberGoalHistory()
+	{
+		$finder = $this->finder('apathy\DailyGoal:History');
+		$result = $finder->where('stats_type', 'member_goal')->fetch();
+		
+		return $result;
+	}
+	
+	public function calculateLongestStreak($entity)
+	{	
+		$streak = 0;
+		$longest['count'] = 0;
+		
+		foreach($entity as $goal)
+		{	
+			if($goal['fulfilled'] == 1)
+			{
+				if($streak == 0)
+				{
+					$longest['startDate'] = $goal['date'];
+				}
+				
+				$streak++;
+			}
+			
+			if($streak > $longest['count'])
+			{
+				$longest['count'] = $streak;
+				$longest['endDate'] = $goal['date'];
+			}
+		}
+		
+		return $longest;
 	}
 }

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style_property_groups>
-  <style_property_group group_name="ap_daily_goal" title="Progress Bar Color" description="Change the color for daily goal progress bars." display_order="0"/>
+  <style_property_group group_name="ap_daily_goals" title="[AP] Daily Goals" description="Control settings related to the Daily Goals addon by apathy." display_order="0"/>
 </style_property_groups>
