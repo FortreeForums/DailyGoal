@@ -51,6 +51,7 @@ class Setup extends AbstractSetup
         		$table->addColumn('date', 'int');
         		$table->addColumn('stats_type', 'varchar', 30);
         		$table->addColumn('counter', 'int')->nullable(true)->setDefault(null);
+        		$table->addColumn('goal', 'int')->nullable(true)->setDefault(null);
         		$table->addColumn('fulfilled', 'bool');
         		$table->addPrimaryKey('date');
     		});
