@@ -9,13 +9,19 @@
   <style_property property_name="apDgGraphGrid" group_name="ap_daily_goals" title="Streak graph grid color" property_type="value" value_type="color" display_order="3">
     <value>"@xf-textColorMuted"</value>
   </style_property>
-  <style_property property_name="apDgGraphLineMembers" group_name="ap_daily_goals" title="Streak graph member color" description="The color of the line representing member goals on the streak graph" property_type="value" value_type="color" display_order="6">
+  <style_property property_name="apDgGraphLineMembers" group_name="ap_daily_goals" title="Streak graph member color" description="The color of the line representing member goals on the streak graph" property_type="value" value_type="color" display_order="8">
     <value>"@xf-borderColorAccentContent"</value>
   </style_property>
-  <style_property property_name="apDgGraphLinePosts" group_name="ap_daily_goals" title="Streak graph post color" description="The color of the line representing post goals on the streak graph" property_type="value" value_type="color" display_order="4">
+  <style_property property_name="apDgGraphLinePosts" group_name="ap_daily_goals" title="Streak graph post color" description="The color of the line representing post goals on the streak graph" property_type="value" value_type="color" display_order="6">
     <value>"@xf-borderColorHighlight"</value>
   </style_property>
-  <style_property property_name="apDgGraphLineThreads" group_name="ap_daily_goals" title="Streak graph thread color" description="The color of the line representing thread goals on the streak graph" property_type="value" value_type="color" display_order="5">
+  <style_property property_name="apDgGraphLineThreads" group_name="ap_daily_goals" title="Streak graph thread color" description="The color of the line representing thread goals on the streak graph" property_type="value" value_type="color" display_order="7">
     <value>"@xf-borderColorFeature"</value>
+  </style_property>
+  <style_property property_name="apDgNegativeGoal" group_name="ap_daily_goals" title="Negative goal color" description="The color to print the goal count &amp; difference percentage in if the goal has not been met" property_type="value" value_type="color" display_order="5">
+    <value>"rgb(246, 64, 64)"</value>
+  </style_property>
+  <style_property property_name="apDgPositiveGoal" group_name="ap_daily_goals" title="Positive goal color" description="The color to print the goal count &amp; difference percentage in if the goal has been met" property_type="value" value_type="color" display_order="4">
+    <value>"rgb(99,178,101)"</value>
   </style_property>
 </style_properties>

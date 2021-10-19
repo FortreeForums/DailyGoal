@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <permissions>
-  <permission permission_group_id="general" permission_id="ap_can_view_daily_goal" permission_type="flag" interface_group_id="generalPermissions" display_order="900"/>
-  <permission permission_group_id="general" permission_id="ap_can_view_goal" permission_type="flag" interface_group_id="generalPermissions" display_order="901"/>
-  <permission permission_group_id="general" permission_id="ap_can_view_mgoal" permission_type="flag" interface_group_id="generalPermissions" display_order="903"/>
-  <permission permission_group_id="general" permission_id="ap_can_view_tgoal" permission_type="flag" interface_group_id="generalPermissions" display_order="902"/>
+  <permission permission_group_id="ap_dailygoals" permission_id="ap_view_goal_streaks" permission_type="flag" interface_group_id="ap_dailygoals" display_order="904"/>
+  <permission permission_group_id="general" permission_id="ap_can_view_daily_goal" permission_type="flag" interface_group_id="ap_dailygoals" display_order="900"/>
+  <permission permission_group_id="general" permission_id="ap_can_view_goal" permission_type="flag" interface_group_id="ap_dailygoals" display_order="901"/>
+  <permission permission_group_id="general" permission_id="ap_can_view_mgoal" permission_type="flag" interface_group_id="ap_dailygoals" display_order="903"/>
+  <permission permission_group_id="general" permission_id="ap_can_view_tgoal" permission_type="flag" interface_group_id="ap_dailygoals" display_order="902"/>
 </permissions>

@@ -9,8 +9,18 @@
   <phrase title="ap_dg_longest_member_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Longest member registration streak]]></phrase>
   <phrase title="ap_dg_longest_post_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Longest post streak]]></phrase>
   <phrase title="ap_dg_longest_thread_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Longest thread streak]]></phrase>
+  <phrase title="ap_dg_member_goal_consistency" version_id="1060070" version_string="1.6.0"><![CDATA[Member goal consistency]]></phrase>
+  <phrase title="ap_dg_member_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Member streak]]></phrase>
   <phrase title="ap_dg_ongoing" version_id="1060070" version_string="1.6.0"><![CDATA[Ongoing]]></phrase>
+  <phrase title="ap_dg_post_goal_consistency" version_id="1060070" version_string="1.6.0"><![CDATA[Post goal consistency]]></phrase>
+  <phrase title="ap_dg_post_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Post streak]]></phrase>
   <phrase title="ap_dg_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Daily goals | Streaks]]></phrase>
+  <phrase title="ap_dg_thread_goal_consistency" version_id="1060070" version_string="1.6.0"><![CDATA[Thread goal consistency]]></phrase>
+  <phrase title="ap_dg_thread_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Thread streak]]></phrase>
+  <phrase title="ap_dg_total_member_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Total member streaks]]></phrase>
+  <phrase title="ap_dg_total_post_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Total post streaks]]></phrase>
+  <phrase title="ap_dg_total_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Total streaks]]></phrase>
+  <phrase title="ap_dg_total_thread_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Total thread streaks]]></phrase>
   <phrase title="ap_dg_view_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[View streaks]]></phrase>
   <phrase title="ap_dg_viewing_goal_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Viewing daily goal streaks]]></phrase>
   <phrase title="cron_entry.apDgCountMembersToday" version_id="1060070" version_string="1.6.0"><![CDATA[[AP] Daily Goals: Count members registered today]]></phrase>
@@ -23,6 +33,7 @@
   <phrase title="option.apDgAutoAdjustWeightMembers" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust weight for members]]></phrase>
   <phrase title="option.apDgAutoAdjustWeightPosts" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust weight for posts]]></phrase>
   <phrase title="option.apDgAutoAdjustWeightThreads" version_id="1060070" version_string="1.6.0"><![CDATA[Auto-adjust weight for threads]]></phrase>
+  <phrase title="option.apDgDiableAutoAdjustment" version_id="1060070" version_string="1.6.0"><![CDATA[Disable auto-adjustment]]></phrase>
   <phrase title="option.apDgDisableMemberGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Disable Member Goals]]></phrase>
   <phrase title="option.apDgDisablePostGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Disable Post Goals]]></phrase>
   <phrase title="option.apDgDisableThreadGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Disable Thread Goals]]></phrase>
@@ -40,6 +51,7 @@
   <phrase title="option_explain.apDgAutoAdjustWeightMembers" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the amount to automatically increase or decrease the member goal by, if the streak length set in the "Auto-adjust timeframe" option has been met]]></phrase>
   <phrase title="option_explain.apDgAutoAdjustWeightPosts" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the amount to automatically increase or decrease the post goal by, if the streak length set in the "Auto-adjust timeframe" option has been met]]></phrase>
   <phrase title="option_explain.apDgAutoAdjustWeightThreads" version_id="1060070" version_string="1.6.0"><![CDATA[Here you can specify the amount to automatically increase or decrease the thread goal by, if the streak length set in the "Auto-adjust timeframe" option has been met]]></phrase>
+  <phrase title="option_explain.apDgDiableAutoAdjustment" version_id="1060070" version_string="1.6.0"><![CDATA[If you want to have a static goal that does not automatically increase/decrease if a streak was maintained/broken then you can disable it here]]></phrase>
   <phrase title="option_explain.apDgDisableMemberGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Check this if you would like to disable member registration goals.]]></phrase>
   <phrase title="option_explain.apDgDisablePostGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Check this if you would like to disable post goals.]]></phrase>
   <phrase title="option_explain.apDgDisableThreadGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Check this if you would like to disable thread goals.]]></phrase>
@@ -53,24 +65,40 @@
   <phrase title="option_explain.ap_goal_color" version_id="1020000" version_string="1.2"><![CDATA[You can choose a color for the progress bar color here.]]></phrase>
   <phrase title="option_group.ap_daily_goal" version_id="1030100" version_string="1.3.1"><![CDATA[[AP] Daily Goals]]></phrase>
   <phrase title="option_group_description.ap_daily_goal" version_id="1030100" version_string="1.3.1"><![CDATA[Configure the goal counts for the Daily Goals addon by apathy]]></phrase>
+  <phrase title="permission.ap_dailygoals_ap_view_goal_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[View streaks]]></phrase>
   <phrase title="permission.general_ap_can_view_daily_goal" version_id="1030100" version_string="1.3.1"><![CDATA[View Daily Goals widget]]></phrase>
   <phrase title="permission.general_ap_can_view_goal" version_id="1010000" version_string="1.1"><![CDATA[View post goal]]></phrase>
   <phrase title="permission.general_ap_can_view_mgoal" version_id="1020000" version_string="1.2"><![CDATA[View member registration goal]]></phrase>
   <phrase title="permission.general_ap_can_view_tgoal" version_id="1020000" version_string="1.2"><![CDATA[View thread goal]]></phrase>
+  <phrase title="permission_interface.ap_dailygoals" version_id="1060070" version_string="1.6.0"><![CDATA[[AP] Daily Goals]]></phrase>
   <phrase title="style_prop.apDgBarBg" version_id="1060070" version_string="1.6.0"><![CDATA[Progress bar background]]></phrase>
   <phrase title="style_prop.apDgBarColor" version_id="1060070" version_string="1.6.0"><![CDATA[Progress bar color]]></phrase>
   <phrase title="style_prop.apDgGraphGrid" version_id="1060070" version_string="1.6.0"><![CDATA[Streak graph grid color]]></phrase>
   <phrase title="style_prop.apDgGraphLineMembers" version_id="1060070" version_string="1.6.0"><![CDATA[Streak graph member color]]></phrase>
   <phrase title="style_prop.apDgGraphLinePosts" version_id="1060070" version_string="1.6.0"><![CDATA[Streak graph post color]]></phrase>
   <phrase title="style_prop.apDgGraphLineThreads" version_id="1060070" version_string="1.6.0"><![CDATA[Streak graph thread color]]></phrase>
+  <phrase title="style_prop.apDgNegativeGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Negative goal color]]></phrase>
+  <phrase title="style_prop.apDgPositiveGoal" version_id="1060070" version_string="1.6.0"><![CDATA[Positive goal color]]></phrase>
   <phrase title="style_prop_desc.apDgBarBg" version_id="1060070" version_string="1.6.0"><![CDATA[Change the background color for the goal progress bars]]></phrase>
   <phrase title="style_prop_desc.apDgBarColor" version_id="1060070" version_string="1.6.0"><![CDATA[Change the color of the goal progress bars]]></phrase>
   <phrase title="style_prop_desc.apDgGraphGrid" version_id="1060070" version_string="1.6.0"><![CDATA[]]></phrase>
   <phrase title="style_prop_desc.apDgGraphLineMembers" version_id="1060070" version_string="1.6.0"><![CDATA[The color of the line representing member goals on the streak graph]]></phrase>
   <phrase title="style_prop_desc.apDgGraphLinePosts" version_id="1060070" version_string="1.6.0"><![CDATA[The color of the line representing post goals on the streak graph]]></phrase>
   <phrase title="style_prop_desc.apDgGraphLineThreads" version_id="1060070" version_string="1.6.0"><![CDATA[The color of the line representing thread goals on the streak graph]]></phrase>
+  <phrase title="style_prop_desc.apDgNegativeGoal" version_id="1060070" version_string="1.6.0"><![CDATA[The color to print the goal count & difference percentage in if the goal has not been met]]></phrase>
+  <phrase title="style_prop_desc.apDgPositiveGoal" version_id="1060070" version_string="1.6.0"><![CDATA[The color to print the goal count & difference percentage in if the goal has been met]]></phrase>
   <phrase title="style_prop_group.ap_daily_goals" version_id="1060070" version_string="1.6.0"><![CDATA[[AP] Daily Goals]]></phrase>
   <phrase title="style_prop_group_desc.ap_daily_goals" version_id="1060070" version_string="1.6.0"><![CDATA[Control settings related to the Daily Goals addon by apathy.]]></phrase>
   <phrase title="widget_def.ap_daily_goal_widget" version_id="1020000" version_string="1.2"><![CDATA[Daily goals]]></phrase>
+  <phrase title="widget_def.ap_dg_member_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Longest memeber streak]]></phrase>
+  <phrase title="widget_def.ap_dg_post_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Longest post streak]]></phrase>
+  <phrase title="widget_def.ap_dg_thread_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Longest thread streak]]></phrase>
+  <phrase title="widget_def.ap_dg_total_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Total streaks]]></phrase>
   <phrase title="widget_def_desc.ap_daily_goal_widget" version_id="1030000" version_string="1.3"><![CDATA[Displays a block containing progress bars for daily post, thread & member registration counts.]]></phrase>
+  <phrase title="widget_def_desc.ap_dg_member_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Displays info on the longest member registration streak.]]></phrase>
+  <phrase title="widget_def_desc.ap_dg_post_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Displays information on the longest post streak]]></phrase>
+  <phrase title="widget_def_desc.ap_dg_thread_streak" version_id="1060070" version_string="1.6.0"><![CDATA[Displays information on the longest thread streak]]></phrase>
+  <phrase title="widget_def_desc.ap_dg_total_streaks" version_id="1060070" version_string="1.6.0"><![CDATA[Displays info on the total amount of streaks for each goal]]></phrase>
+  <phrase title="widget_pos.ap_dg_streaks_sidebar" version_id="1060070" version_string="1.6.0"><![CDATA[Daily goal streaks: Sidebar]]></phrase>
+  <phrase title="widget_pos_desc.ap_dg_streaks_sidebar" version_id="1060070" version_string="1.6.0"><![CDATA[The right-hand column of the Streaks page]]></phrase>
 </phrases>

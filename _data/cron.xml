@@ -3,5 +3,5 @@
   <entry entry_id="apDgCountMembersToday" cron_class="apathy\DailyGoal\Cron\Counter" cron_method="countMembersFromToday" active="1"><![CDATA[{"day_type":"dom","dom":[-1],"hours":[-1],"minutes":[5,15,25,35,45,55]}]]></entry>
   <entry entry_id="apDgCountPostsMadeToday" cron_class="apathy\DailyGoal\Cron\Counter" cron_method="countPostsFromToday" active="1"><![CDATA[{"day_type":"dom","dom":[-1],"hours":[-1],"minutes":[3,13,23,33,43,53]}]]></entry>
   <entry entry_id="apDgCountThreadsMadeToday" cron_class="apathy\DailyGoal\Cron\Counter" cron_method="countThreadsFromToday" active="1"><![CDATA[{"day_type":"dom","dom":[-1],"hours":[-1],"minutes":[4,14,24,34,44,54]}]]></entry>
-  <entry entry_id="apDgResetCounterMidnight" cron_class="apathy\DailyGoal\Cron\Counter" cron_method="resetCounterAtMidnight" active="1"><![CDATA[{"day_type":"dow","dow":[-1],"hours":[0],"minutes":[0]}]]></entry>
+  <entry entry_id="apDgResetCounterMidnight" cron_class="apathy\DailyGoal\Cron\Counter" cron_method="resetCounterAtMidnight" active="1"><![CDATA[{"day_type":"dow","dow":[-1],"hours":[23],"minutes":[59]}]]></entry>
 </cron>

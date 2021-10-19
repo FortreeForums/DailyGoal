@@ -36,22 +36,113 @@ class TotalStreaks extends AbstractWidget
     	
     	if(!$options->apDgDisablePostGoal)
 	{
-		$posts = $repo->findThreadGoalHistory();
+		$posts = $this->finder('apathy\DailyGoal:History')
+			      ->where('stats_type', 'post_goal')
+			      ->fetch();
+		
+		$i = 0;
+		$streak = 0;
+		$postTotal = 0;
+		$postGoalsMet = 0;
+		
+		foreach($posts as $goal)
+		{
+			if($goal['fulfilled'] && $i >= 1)
+			{
+				$streak++;
+			}
+			
+			if($goal['fulfilled'] == 1)
+			{
+				$i++;
+				$postGoalsMet++;
+			}
+			
+			if($goal['fulfilled'] == 0)
+			{
+				$i = 0;
+			}
+			
+			$postTotal++;
+		}
+		
+		$posts = $streak;
 	}
 	
     	if(!$options->apDgDisableThreadGoal)
 	{
-		$threads = $repo->findThreadGoalHistory();
+		$threads = $this->finder('apathy\DailyGoal:History')
+			        ->where('stats_type', 'thread_goal')
+			        ->fetch();
+			        
+		$i = 0;
+		$streak = 0;
+		$threadTotal = 0;
+		$threadGoalsMet = 0;
+		
+		foreach($threads as $goal)
+		{		
+			if($goal['fulfilled'] && $i >= 1)
+			{
+				$streak++;
+			}
+			
+			if($goal['fulfilled'] == 1)
+			{
+				$i++;
+				$threadGoalsMet++;
+			}
+			
+			if($goal['fulfilled'] == 0)
+			{
+				$i = 0;
+			}
+			
+			$threadTotal++;
+		}
+		
+		$threads = $streak;
 	}
 	
     	if(!$options->apDgDisableMemberGoal)
 	{
-		$members = $repo->findThreadGoalHistory();
+		$members = $this->finder('apathy\DailyGoal:History')
+			        ->where('stats_type', 'member_goal')
+			        ->fetch();
+			        
+		$i = 0;
+		$streak = 0;
+		$memberTotal = 0;
+		$memberGoalsMet = 0;
+		
+		foreach($members as $goal)
+		{		
+			if($goal['fulfilled'] && $i >= 1)
+			{
+				$streak++;
+			}
+			
+			if($goal['fulfilled'] == 1)
+			{
+				$i++;
+				$memberGoalsMet++;
+			}
+			
+			$memberTotal++;
+		}
+		
+		$members = $streak;
 	}
 	
-	$total['posts'] = isset($posts) ? $posts->count() : NULL;
-	$total['threads'] = isset($threads) ? $threads->count() : NULL;
-	$total['members'] = isset($members) ? $members->count() : NULL;
+	$total['posts'] = isset($posts) ? $posts : NULL;
+	$total['postTotal'] = isset($postTotal) ? $postTotal : NULL;
+	$total['postGoalsMet'] = isset($postGoalsMet) ? $postGoalsMet : NULL;
+	$total['threads'] = isset($threads) ? $threads : NULL;
+	$total['threadTotal'] = isset($threadTotal) ? $threadTotal : NULL;
+	$total['threadGoalsMet'] = isset($threadGoalsMet) ? $threadGoalsMet : NULL;
+	$total['members'] = isset($members) ? $members : NULL;
+	$total['memberTotal'] = isset($memberTotal) ? $memberTotal : NULL;
+	$total['memberGoalsMet'] = isset($memberGoalsMet) ? $memberGoalsMet : NULL;
     
         $viewParams = [
         	'total' => $total

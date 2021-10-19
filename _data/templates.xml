@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
+  <template type="public" title="ap_dg_member_streak_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<div class="block block--progress" {{ widget_data($widget) }}>
+   	<div class="block-container">
+       	<h3 class="block-minorHeader">{{ phrase('ap_dg_member_streak') }}</h3>
+		<xf:if is="!$xf.options.apDgDisableMemberGoal">
+			<xf:macro template="ap_dg_streak_macros" name="ap_dg_streak" arg-type="{$longestMemberStreak}" arg-goalType="member" />
+		</xf:if>
+    </div>
+</div>]]></template>
+  <template type="public" title="ap_dg_post_streak_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<div class="block block--progress" {{ widget_data($widget) }}>
+   	<div class="block-container">
+       	<h3 class="block-minorHeader">{{ phrase('ap_dg_post_streak') }}</h3>
+		<xf:if is="!$xf.options.apDgDisablePostGoal">
+			<xf:macro template="ap_dg_streak_macros" name="ap_dg_streak" arg-type="{$longestPostStreak}" arg-goalType="post" />
+		</xf:if>
+    </div>
+</div>]]></template>
   <template type="public" title="ap_dg_progress_bar.less" version_id="1060070" version_string="1.6.0"><![CDATA[/* From Russ on Xenforo
    https://xenforo.com/community/threads/does-this-add-on-exist-profile-progression.168788/#post-1368520 */
 
@@ -12,7 +28,7 @@
         width:100%;
         height:30px;
         overflow:hidden;
-        background: {{ property('ap_daily_goal_bar_bg') }} !important;
+        background: {{ property('apDgBarBg') }} !important;
         border-radius: @xf-borderRadiusLarge;
     }
     .progress-width
@@ -22,7 +38,7 @@
         height:100%;
         background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.125) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.125) 50%, rgba(255, 255, 255, 0.125) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
         background-size: 35px 35px;
-        background-color: {{ property('ap_daily_goal_bar_color') }} !important;
+        background-color: {{ property('apDgBarColor') }} !important;
 		text-align: center;
     }
     .progress-percent
@@ -79,7 +95,7 @@
 				</div>
 				<div class="contentRow-header">
 					<span class="title">
-						<i class="fa--xf far fa-calendar-star"></i> {{ date($type.startDate, 'F j, Y') }}
+						{{ date($type.startDate, 'F j, Y') }}
 					</span>
 				</div>
 			</div>
@@ -97,9 +113,9 @@
 						<xf:set var="$today" value="{{ date($xf.time, 'F j, Y') }}" />
 
 						<xf:if is="$endDate == $today">
-							<i class="fa--xf far fa-exclamation-circle"></i> {{ phrase('ap_dg_ongoing') }}
+							{{ phrase('ap_dg_ongoing') }}
 						<xf:else />
-							<i class="fa--xf fas fa-calendar-star"></i> {{ date($type.endDate, 'F j, Y') }}
+							{{ date($type.endDate, 'F j, Y') }}
 						</xf:if>
 					</span>
 				</div>
@@ -114,23 +130,24 @@
 <xf:css src="stats.less" />
 
 <xf:js prod="xf/stats-compiled.js" dev="vendor/chartist/chartist.min.js, xf/stats.js" />
+<xf:js>
+	XF.Goal = XF.extend(XF.Stats, {
+		options: $.extend({}, XF.Stats.prototype.options, {
+			maxTicks: 8
+		})
+	});
+	
+	XF.Element.register('goal', 'XF.Goal');
+</xf:js>
+
+<xf:sidebar>
+	<xf:widgetpos id="ap_dg_streaks_sidebar" />
+</xf:sidebar>
 
 <div class="block">
 	<div class="block-container">
-		<div class="block-body ap-dg-streaks--grid">
-			<xf:if is="!$xf.options.apDgDisablePostGoal">
-				<xf:macro template="ap_dg_streak_macros" name="ap_dg_streak" arg-type="{$longestPostStreak}" arg-goalType="post" />
-			</xf:if>
-			<xf:if is="!$xf.options.apDgDisableThreadGoal">
-				<xf:macro template="ap_dg_streak_macros" name="ap_dg_streak" arg-type="{$longestThreadStreak}" arg-goalType="thread" />
-			</xf:if>
-			<xf:if is="!$xf.options.apDgDisableMemberGoal">
-				<xf:macro template="ap_dg_streak_macros" name="ap_dg_streak" arg-type="{$longestMemberStreak}" arg-goalType="member" />
-			</xf:if>
-		</div>
-
 		<div class="block-body">
-			<div data-xf-init="stats" class="ap-dg-streaks--item">
+			<div data-xf-init="goal" class="ap-dg-streaks--item">
 				<div class="ap-dg-streaks--block ap-dg-streaks--graph">
 					<div class="ap-dg-streaks--main">
 						<script class="js-statsData" type="application/json">
@@ -139,7 +156,7 @@
 						<script class="js-statsSeriesLabels" type="application/json">
 							{$streakTypes|json|raw}
 						</script>
-						<div class="ct-chart ct-major-tenth js-statsChart"></div>
+						<div class="ct-chart ct-chart--small ct-major-tenth js-statsChart"></div>
 						<ul class="ct-legend js-statsLegend"></ul>
 					</div>
 				</div>
@@ -172,18 +189,20 @@
 								</td>
 								<td class="dataList-cell">{$goal.counter} / {$goal.goal}</td>
 								<td class="dataList-cell">
-									<xf:set var="$percentage" value="{{ ( $goal.counter / $goal.goal ) * 100 }}" />
-										
-									<span style="color:{{ $percentage >= 100 ? 'green' : 'red' }}">
-										{{ floor($percentage) }}%
-									</span>
+									<xf:set var="$percentage" value="{{ ( ( $goal.counter - $goal.goal ) / $goal.goal ) * 100 }}" />
+									
+									<xf:if is="$percentage >= 0">
+										<span style="color:{{ property('apDgPositiveGoal') }}">
+											+{{ floor($percentage) }}%
+										</span>
+									<xf:else />
+										<span style="color:{{ property('apDgNegativeGoal') }}">
+											{{ floor($percentage) }}%
+										</span>
+									</xf:if>
 								</td>
 								<td class="dataList-cell">
-									<xf:if is="$goal.fulfilled == 1">
-										{{ phrase('yes') }}
-									<xf:else />
-										{{ phrase('no') }}
-									</xf:if>
+									<i class="fas fa-{{ $goal.fulfilled == 1 ? 'check-circle' : 'times-circle' }}"></i>
 								</td>
 								<td class="dataList-cell">{{date('F j, Y', $goal.date)}}</td>
 							</tr>
@@ -290,6 +309,102 @@
 		}
 	}
 }]]></template>
+  <template type="public" title="ap_dg_thread_streak_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<div class="block block--progress" {{ widget_data($widget) }}>
+   	<div class="block-container">
+       	<h3 class="block-minorHeader">{{ phrase('ap_dg_thread_streak') }}</h3>
+		<xf:if is="!$xf.options.apDgDisableThreadGoal">
+			<xf:macro template="ap_dg_streak_macros" name="ap_dg_streak" arg-type="{$longestThreadStreak}" arg-goalType="thread" />
+		</xf:if>
+    </div>
+</div>]]></template>
+  <template type="public" title="ap_dg_total_streaks_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<div class="block block--progress" {{ widget_data($widget) }}>
+   	<div class="block-container">
+       	<h3 class="block-minorHeader">{{ phrase('ap_dg_total_streaks') }}</h3>
+		<xf:if is="!$xf.options.apDgDisablePostGoal">
+			<div class="ap-dg-streaks--item block-row">
+				<div class="ap-dg-streaks--block contentRow" align="center">
+					<div class="ap-dg-streaks--main">
+						<div class="contentRow-lesser" align="center">
+							{{ phrase('ap_dg_total_post_streaks') }}
+						</div>
+						<div class="contentRow-header">
+							<span class="title">{$total.posts}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ap-dg-streaks--item block-row">
+				<div class="ap-dg-streaks--block contentRow" align="center">
+					<div class="ap-dg-streaks--main">
+						<div class="contentRow-lesser" align="center">
+							{{ phrase('ap_dg_post_goal_consistency') }}
+						</div>
+						<div class="contentRow-header">
+							<xf:set var="$postPercent" value="{{ ( $total.postGoalsMet / $total.postTotal ) * 100 }}" />
+							<span class="title">{$total.postGoalsMet} / {$total.postTotal} {{ phrase('days')|to_lower }} ({{ floor($postPercent) }}%)</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</xf:if>
+		
+		<xf:if is="!$xf.options.apDgDisableThreadGoal">
+			<div class="ap-dg-streaks--item block-row">
+				<div class="ap-dg-streaks--block contentRow" align="center">
+					<div class="ap-dg-streaks--main">
+						<div class="contentRow-lesser" align="center">
+							{{ phrase('ap_dg_total_thread_streaks') }}
+						</div>
+						<div class="contentRow-header">
+							<span class="title">{$total.threads}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ap-dg-streaks--item block-row">
+				<div class="ap-dg-streaks--block contentRow" align="center">
+					<div class="ap-dg-streaks--main">
+						<div class="contentRow-lesser" align="center">
+							{{ phrase('ap_dg_thread_goal_consistency') }}
+						</div>
+						<div class="contentRow-header">
+							<xf:set var="$threadPercent" value="{{ ( $total.threadGoalsMet / $total.threadTotal ) * 100 }}" />
+							<span class="title">{$total.threadGoalsMet} / {$total.threadTotal} {{ phrase('days')|to_lower }} ({{ floor($threadPercent) }}%)</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</xf:if>
+		
+		<xf:if is="!$xf.options.apDgDisableMemberGoal">
+			<div class="ap-dg-streaks--item block-row">
+				<div class="ap-dg-streaks--block contentRow" align="center">
+					<div class="ap-dg-streaks--main">
+						<div class="contentRow-lesser" align="center">
+							{{ phrase('ap_dg_total_member_streaks') }}
+						</div>
+						<div class="contentRow-header">
+							<span class="title">{$total.members}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ap-dg-streaks--item block-row">
+				<div class="ap-dg-streaks--block contentRow" align="center">
+					<div class="ap-dg-streaks--main">
+						<div class="contentRow-lesser" align="center">
+							{{ phrase('ap_dg_member_goal_consistency') }}
+						</div>
+						<div class="contentRow-header">
+							<xf:set var="$memberPercent" value="{{ ( $total.memberGoalsMet / $total.memberTotal ) * 100 }}" />
+							<span class="title">{$total.memberGoalsMet} / {$total.memberTotal} {{ phrase('days')|to_lower }} ({{ floor($memberPercent) }}%)</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</xf:if>
+    </div>
+</div>]]></template>
   <template type="public" title="ap_dg_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<xf:if is="$xf.visitor.hasPermission('general', 'ap_can_view_daily_goal')">
 <xf:css src="ap_dg_progress_bar.less" />
 
@@ -308,9 +423,9 @@
 					<xf:if is="!$xf.options.apDgDisablePostGoal && $xf.visitor.hasPermission('general', 'ap_can_view_goal')">
 						{{ phrase('posts') }}
 						<xf:if is="$p >= $xf.options.apDgPostGoal">
-							<span style="float:right;"><span style="color:green;">{{ $p ? $p : '0' }}</span>/{$xf.options.apDgPostGoal}</span>
+							<span style="float:right;"><span style="color:{{ property('apDgPositiveGoal') }}">{{ $p ? $p : '0' }}</span>/{$xf.options.apDgPostGoal}</span>
 						<xf:else />
-							<span style="float:right;"><span style="color:red;">{{$p ? $p : '0' }}</span>/{$xf.options.apDgPostGoal}</span>
+							<span style="float:right;"><span style="color:{{ property('apDgNegativeGoal') }}">{{$p ? $p : '0' }}</span>/{$xf.options.apDgPostGoal}</span>
 						</xf:if>
 						<div class="progress-bar">
 							<div class="progress-width" style="width: {$pp|number}%;"></div>
@@ -349,9 +464,11 @@
 					</xf:if>
 				</li>
 			</ul>
-			<div class="block-footer">
-				<a href="{{ link('daily-goals') }}">{{ phrase('ap_dg_view_streaks') }}</a>
-			</div>
+			<xf:if is="$xf.visitor.hasPermission('ap_dailygoals', 'ap_view_goal_streaks')">
+				<div class="block-footer">
+					<a href="{{ link('daily-goals') }}">{{ phrase('ap_dg_view_streaks') }}</a>
+				</div>
+			</xf:if>
     	</div>
 	</div>
 </xf:if>]]></template>

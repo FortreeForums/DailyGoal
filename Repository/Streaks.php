@@ -58,23 +58,30 @@ class Streaks extends Repository
 	{	
 		$streak = 0;
 		$longest['count'] = 0;
+		$options = \XF::options();
 		
 		foreach($entity as $goal)
 		{	
 			if($goal['fulfilled'] == 1)
-			{
-				if($streak == 0)
+			{	
+				if($streak == 0
+				&& $streak >= $longest['count'])
 				{
 					$longest['startDate'] = $goal['date'];
 				}
-				
+
 				$streak++;
 			}
 			
 			if($streak > $longest['count'])
 			{
 				$longest['count'] = $streak;
+			}
+			
+			if($goal['fulfilled'] == 0 && $streak == $longest['count'])
+			{
 				$longest['endDate'] = $goal['date'];
+				$streak = 0;
 			}
 		}
 		
