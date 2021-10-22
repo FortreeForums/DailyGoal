@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget_definitions>
   <widget_definition definition_id="ap_daily_goal_widget" definition_class="apathy\DailyGoal\Widget\GoalCounters"/>
+  <widget_definition definition_id="ap_dg_member_streak" definition_class="apathy\DailyGoal\Widget\LongestMemberStreak"/>
+  <widget_definition definition_id="ap_dg_post_streak" definition_class="apathy\DailyGoal\Widget\LongestPostStreak"/>
+  <widget_definition definition_id="ap_dg_thread_streak" definition_class="apathy\DailyGoal\Widget\LongestThreadStreak"/>
+  <widget_definition definition_id="ap_dg_total_streaks" definition_class="apathy\DailyGoal\Widget\TotalStreaks"/>
 </widget_definitions>

@@ -27,13 +27,24 @@ namespace apathy\DailyGoal\Widget;
 
 use XF\Widget\AbstractWidget;
 
-class GoalCounters extends AbstractWidget
+class LongestPostStreak extends AbstractWidget
 {
     public function render()
     {
-        $viewParams = [];
+    	$options = \XF::options();
+    	$repo = $this->repository('apathy\DailyGoal:Streaks');
+    	
+    	if(!$options->apDgDisablePostGoal)
+	{
+		$posts = $repo->findPostGoalHistory();
+		$longestPostStreak = $repo->calculateLongestStreak($posts);
+	}
+    
+        $viewParams = [
+        	'longestPostStreak' => $longestPostStreak
+        ];
 
-        return $this->renderer('ap_dg_widget', $viewParams);
+        return $this->renderer('ap_dg_post_streak_widget', $viewParams);
     }
 
     public function getOptionsTemplate()
