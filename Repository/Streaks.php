@@ -65,12 +65,34 @@ class Streaks extends Repository
 			if($goal['fulfilled'] == 1)
 			{	
 				if($streak == 0
-				&& $streak >= $longest['count'])
+				&& $streak == $longest['count'])
 				{
 					$longest['startDate'] = $goal['date'];
 				}
+				
+				if($streak >= 1 
+				&& $streak >= $longest['count'])
+				{
+					$longest['endDate'] = $goal['date'];
+				}
 
 				$streak++;
+			}
+			elseif($goal['fulfilled'] == 0 && $streak >= $longest['count']) 
+			{		
+				$longest['endDate'] = $goal['date'];		
+				$streak = 0;
+			}
+			elseif($goal['fulfilled'] == 0)
+			{
+				$streak = 0;
+			}
+						
+			if($goal['date'] > $longest['startDate']
+			&& $goal['date'] > $longest['endDate']
+			&& $streak == ( $longest['count'] - $streak ))
+			{
+				$longest['startDate'] = $goal['date'];
 			}
 			
 			if($streak > $longest['count'])
@@ -78,11 +100,7 @@ class Streaks extends Repository
 				$longest['count'] = $streak;
 			}
 			
-			if($goal['fulfilled'] == 0 && $streak == $longest['count'])
-			{
-				$longest['endDate'] = $goal['date'];
-				$streak = 0;
-			}
+			$longest['last'] = $streak;
 		}
 		
 		return $longest;

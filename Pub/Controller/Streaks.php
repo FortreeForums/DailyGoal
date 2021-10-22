@@ -74,6 +74,8 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 		$streak = 0;
 		$options = \XF::options();
 		
+		$streaks[] = '';
+		
 		foreach($entity as $goal)
 		{
 			$date = date('Y-m-d', $goal['date']);
@@ -93,12 +95,14 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 				$values['post'] = $streak;
 				$averages['post'] = $streak;
 			}
+			
 			if($goal['stats_type'] == 'thread_goal'
 			&& !$options->apDgDisableThreadGoal)
 			{
 				$values['thread'] = $streak;
 				$averages['thread'] = $streak;
 			}
+			
 			if($goal['stats_type'] == 'member_goal'
 			&& !$options->apDgDisableMemberGoal)
 			{
@@ -115,6 +119,8 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 				'averages' => $averages,
 			];
 		}
+		
+		unset($streaks[0]);
 		
 		return $streaks;
 	}

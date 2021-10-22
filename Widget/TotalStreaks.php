@@ -47,7 +47,7 @@ class TotalStreaks extends AbstractWidget
 		
 		foreach($posts as $goal)
 		{
-			if($goal['fulfilled'] && $i >= 1)
+			if($goal['fulfilled'] && $i == 1)
 			{
 				$streak++;
 			}
@@ -82,7 +82,7 @@ class TotalStreaks extends AbstractWidget
 		
 		foreach($threads as $goal)
 		{		
-			if($goal['fulfilled'] && $i >= 1)
+			if($goal['fulfilled'] && $i == 1)
 			{
 				$streak++;
 			}
@@ -117,7 +117,7 @@ class TotalStreaks extends AbstractWidget
 		
 		foreach($members as $goal)
 		{		
-			if($goal['fulfilled'] && $i >= 1)
+			if($goal['fulfilled'] && $i == 1)
 			{
 				$streak++;
 			}
@@ -134,15 +134,15 @@ class TotalStreaks extends AbstractWidget
 		$members = $streak;
 	}
 	
-	$total['posts'] = isset($posts) ? $posts : NULL;
-	$total['postTotal'] = isset($postTotal) ? $postTotal : NULL;
-	$total['postGoalsMet'] = isset($postGoalsMet) ? $postGoalsMet : NULL;
-	$total['threads'] = isset($threads) ? $threads : NULL;
-	$total['threadTotal'] = isset($threadTotal) ? $threadTotal : NULL;
-	$total['threadGoalsMet'] = isset($threadGoalsMet) ? $threadGoalsMet : NULL;
-	$total['members'] = isset($members) ? $members : NULL;
-	$total['memberTotal'] = isset($memberTotal) ? $memberTotal : NULL;
-	$total['memberGoalsMet'] = isset($memberGoalsMet) ? $memberGoalsMet : NULL;
+	$total['posts'] = isset($posts) ? $posts : 0;
+	$total['postTotal'] = isset($postTotal) ? $postTotal : 0;
+	$total['postGoalsMet'] = isset($postGoalsMet) ? $postGoalsMet : 0;
+	$total['threads'] = isset($threads) ? $threads : 0;
+	$total['threadTotal'] = isset($threadTotal) ? $threadTotal : 0;
+	$total['threadGoalsMet'] = isset($threadGoalsMet) ? $threadGoalsMet : 0;
+	$total['members'] = isset($members) ? $members : 0;
+	$total['memberTotal'] = isset($memberTotal) ? $memberTotal : 0;
+	$total['memberGoalsMet'] = isset($memberGoalsMet) ? $memberGoalsMet : 0;
     
         $viewParams = [
         	'total' => $total

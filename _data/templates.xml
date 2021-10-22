@@ -95,7 +95,8 @@
 				</div>
 				<div class="contentRow-header">
 					<span class="title">
-						{{ date($type.startDate, 'F j, Y') }}
+						<xf:set var="$startDate" value="{{ date($type.startDate, 'F j, Y') }}" />
+						{$startDate}
 					</span>
 				</div>
 			</div>
@@ -109,13 +110,11 @@
 				</div>
 				<div class="contentRow-header">
 					<span class="title">
-						<xf:set var="$endDate" value="{{ date($longestPostStreak.endDate, 'F j, Y') }}" />
-						<xf:set var="$today" value="{{ date($xf.time, 'F j, Y') }}" />
-
-						<xf:if is="$endDate == $today">
+						<xf:if is="$type.last >= 1">
 							{{ phrase('ap_dg_ongoing') }}
 						<xf:else />
-							{{ date($type.endDate, 'F j, Y') }}
+							<xf:set var="$endDate" value="{{ date($type.endDate, 'F j, Y') }}" />
+							{$endDate}
 						</xf:if>
 					</span>
 				</div>
@@ -130,15 +129,6 @@
 <xf:css src="stats.less" />
 
 <xf:js prod="xf/stats-compiled.js" dev="vendor/chartist/chartist.min.js, xf/stats.js" />
-<xf:js>
-	XF.Goal = XF.extend(XF.Stats, {
-		options: $.extend({}, XF.Stats.prototype.options, {
-			maxTicks: 8
-		})
-	});
-	
-	XF.Element.register('goal', 'XF.Goal');
-</xf:js>
 
 <xf:sidebar>
 	<xf:widgetpos id="ap_dg_streaks_sidebar" />
@@ -147,7 +137,7 @@
 <div class="block">
 	<div class="block-container">
 		<div class="block-body">
-			<div data-xf-init="goal" class="ap-dg-streaks--item">
+			<div data-xf-init="stats" class="ap-dg-streaks--item">
 				<div class="ap-dg-streaks--block ap-dg-streaks--graph">
 					<div class="ap-dg-streaks--main">
 						<script class="js-statsData" type="application/json">
@@ -333,19 +323,21 @@
 					</div>
 				</div>
 			</div>
-			<div class="ap-dg-streaks--item block-row">
-				<div class="ap-dg-streaks--block contentRow" align="center">
-					<div class="ap-dg-streaks--main">
-						<div class="contentRow-lesser" align="center">
-							{{ phrase('ap_dg_post_goal_consistency') }}
-						</div>
-						<div class="contentRow-header">
-							<xf:set var="$postPercent" value="{{ ( $total.postGoalsMet / $total.postTotal ) * 100 }}" />
-							<span class="title">{$total.postGoalsMet} / {$total.postTotal} {{ phrase('days')|to_lower }} ({{ floor($postPercent) }}%)</span>
+			<xf:if is="$total.postGoalsMet >= 1">
+				<div class="ap-dg-streaks--item block-row">
+					<div class="ap-dg-streaks--block contentRow" align="center">
+						<div class="ap-dg-streaks--main">
+							<div class="contentRow-lesser" align="center">
+								{{ phrase('ap_dg_post_goal_consistency') }}
+							</div>
+							<div class="contentRow-header">
+								<xf:set var="$postPercent" value="{{ ( $total.postGoalsMet / $total.postTotal ) * 100 }}" />
+								<span class="title">{$total.postGoalsMet} / {$total.postTotal} {{ phrase('days')|to_lower }} ({{ floor($postPercent) }}%)</span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</xf:if>
 		</xf:if>
 		
 		<xf:if is="!$xf.options.apDgDisableThreadGoal">
@@ -361,19 +353,22 @@
 					</div>
 				</div>
 			</div>
-			<div class="ap-dg-streaks--item block-row">
-				<div class="ap-dg-streaks--block contentRow" align="center">
-					<div class="ap-dg-streaks--main">
-						<div class="contentRow-lesser" align="center">
-							{{ phrase('ap_dg_thread_goal_consistency') }}
-						</div>
-						<div class="contentRow-header">
-							<xf:set var="$threadPercent" value="{{ ( $total.threadGoalsMet / $total.threadTotal ) * 100 }}" />
-							<span class="title">{$total.threadGoalsMet} / {$total.threadTotal} {{ phrase('days')|to_lower }} ({{ floor($threadPercent) }}%)</span>
+			
+			<xf:if is="$total.threadGoalsMet >= 1">
+				<div class="ap-dg-streaks--item block-row">
+					<div class="ap-dg-streaks--block contentRow" align="center">
+						<div class="ap-dg-streaks--main">
+							<div class="contentRow-lesser" align="center">
+								{{ phrase('ap_dg_thread_goal_consistency') }}
+							</div>
+							<div class="contentRow-header">
+								<xf:set var="$threadPercent" value="{{ ( $total.threadGoalsMet / $total.threadTotal ) * 100 }}" />
+								<span class="title">{$total.threadGoalsMet} / {$total.threadTotal} {{ phrase('days')|to_lower }} ({{ floor($threadPercent) }}%)</span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</xf:if>
 		</xf:if>
 		
 		<xf:if is="!$xf.options.apDgDisableMemberGoal">
@@ -389,19 +384,21 @@
 					</div>
 				</div>
 			</div>
-			<div class="ap-dg-streaks--item block-row">
-				<div class="ap-dg-streaks--block contentRow" align="center">
-					<div class="ap-dg-streaks--main">
-						<div class="contentRow-lesser" align="center">
-							{{ phrase('ap_dg_member_goal_consistency') }}
-						</div>
-						<div class="contentRow-header">
-							<xf:set var="$memberPercent" value="{{ ( $total.memberGoalsMet / $total.memberTotal ) * 100 }}" />
-							<span class="title">{$total.memberGoalsMet} / {$total.memberTotal} {{ phrase('days')|to_lower }} ({{ floor($memberPercent) }}%)</span>
+			<xf:if is="$total.memberGoalsMet >= 1">
+				<div class="ap-dg-streaks--item block-row">
+					<div class="ap-dg-streaks--block contentRow" align="center">
+						<div class="ap-dg-streaks--main">
+							<div class="contentRow-lesser" align="center">
+								{{ phrase('ap_dg_member_goal_consistency') }}
+							</div>
+							<div class="contentRow-header">
+								<xf:set var="$memberPercent" value="{{ ( $total.memberGoalsMet / $total.memberTotal ) * 100 }}" />
+								<span class="title">{$total.memberGoalsMet} / {$total.memberTotal} {{ phrase('days')|to_lower }} ({{ floor($memberPercent) }}%)</span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</xf:if>
 		</xf:if>
     </div>
 </div>]]></template>
