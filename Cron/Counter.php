@@ -77,11 +77,8 @@ class Counter
 
 	public static function countThreadsFromToday()
 	{
-		$db = \XF::db();
-		$app = \XF::app();
 		$options = \XF::options();
-		$forums = $options->apDgExcludedNodesThreads;
-		$forum_id = implode(",", $forums);
+		$forum_id = $options->apDgExcludedNodesThreads;
 
 		if(empty($forum_id))
 		{
@@ -89,11 +86,15 @@ class Counter
 		}
 
 		if(!$options->apDgDisableThreadGoal)
-		{
-			$count = $db->fetchOne('SELECT count(thread_id) AS threadCount
-					FROM xf_thread
-					WHERE DATE(FROM_UNIXTIME(post_date)) = CURDATE()
-                    			AND node_id NOT IN (?)', [$forum_id]);
+		{         
+			$app = \XF::app();           			
+                    	$finder = \XF::finder('XF:Thread');
+                    	$post_date = 'DATE(FROM_UNIXTIME(post_date)) = CURDATE()';
+                    	
+                    	$count = $finder->whereSql($post_date)
+                    			->where('node_id', '!=', $forum_id)
+                    			->fetch()
+                    			->count();
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['threadCount'] = $count;
@@ -102,15 +103,17 @@ class Counter
 
 	public static function countMembersFromToday()
 	{
-		$db = \XF::db();
-		$app = \XF::app();
 		$options = \XF::options();
 
 		if(!$options->apDgDisableMemberGoal)
-		{
-			$count = $db->fetchOne('SELECT count(user_id) AS memberCount
-					FROM xf_user
-					WHERE DATE(FROM_UNIXTIME(register_date)) = CURDATE()');
+		{	
+			$app = \XF::app();			
+			$finder = \XF::finder('XF:User');
+                    	$register_date = 'DATE(FROM_UNIXTIME(register_date)) = CURDATE()';
+                    	
+                    	$count = $finder->whereSql($register_date)
+                    			->fetch()
+                    			->count();
 
 			$simpleCache = $app->simpleCache();
 			$simpleCache['apathy/DailyGoal']['memberCount'] = $count;
