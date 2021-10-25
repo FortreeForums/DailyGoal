@@ -30,12 +30,8 @@ class Counter
 	public static function countPostsFromToday()
 	{
 		$options = \XF::options();
-		$forum_id = $options->apDgExcludedNodesPosts;
-
-		if(empty($forum_id))
-		{
-			$forum_id = '0';
-		}
+		$forums = $options->apDgExcludedNodesPosts;
+		$forum_id = $forums ? $forums : 0;
 
 		if(!$options->apDgDisablePostGoal)
 		{
@@ -80,12 +76,8 @@ class Counter
 	public static function countThreadsFromToday()
 	{
 		$options = \XF::options();
-		$forum_id = $options->apDgExcludedNodesThreads;
-
-		if(empty($forum_id))
-		{
-			$forum_id = '0';
-		}
+		$forums = $options->apDgExcludedNodesThreads;
+		$forum_id = $forums ? $forums : 0
 
 		if(!$options->apDgDisableThreadGoal)
 		{         
