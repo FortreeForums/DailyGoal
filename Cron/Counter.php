@@ -32,8 +32,7 @@ class Counter
 		$db = \XF::db();
 		$app = \XF::app();
 		$options = \XF::options();
-		$forums = $options->apDgExcludedNodesPosts;
-		$forum_id = implode(",", $forums);
+		$forum_id = $options->apDgExcludedNodesPosts;
 
 		if(empty($forum_id))
 		{
@@ -56,14 +55,15 @@ class Counter
                     	if(array_key_exists('UW/FCS', $addons) 
 			&& $addons['UW/FCS'] >= 1
 			&& $options->apDgIncludeComments)
-			{                    				
-                    		$commentCount = $db->fetchOne('SELECT COUNT(c.comment_id) AS count
-                    			FROM xf_uw_comment AS c
-                    			LEFT JOIN xf_thread AS t ON (t.thread_id = c.thread_id)
-                    			LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
-                    			WHERE DATE(FROM_UNIXTIME(c.comment_date)) = CURDATE()
-                    			AND f.node_id NOT IN (?)', [$forum_id]);
-                    				  
+			{
+                    		$finder = \XF::finder('UW\FCS:Comment');
+                    		$comment_date = 'DATE(FROM_UNIXTIME(comment_date)) = CURDATE()';
+                    		$commentCount = $finder->with('Thread')
+                    				       ->whereSql($comment_date)
+                    				       ->where('Thread.node_id', '!=', $forum_id)
+                    				       ->fetch()
+                    				       ->count();
+                    				       
                     		$count = ($postCount + $commentCount);
                     	}
                     	else
