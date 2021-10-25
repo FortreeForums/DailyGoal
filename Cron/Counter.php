@@ -42,12 +42,13 @@ class Counter
 
 		if(!$options->apDgDisablePostGoal)
 		{
-			$postCount = $db->fetchOne('SELECT count(p.post_id) AS count 
-					FROM xf_post AS p
-                    			LEFT JOIN xf_thread AS t ON (t.thread_id = p.thread_id)
-                    			LEFT JOIN xf_forum AS f ON (f.node_id = t.node_id)
-					WHERE DATE(FROM_UNIXTIME(p.post_date)) = CURDATE()
-                    			AND f.node_id NOT IN (?)', [$forum_id]);
+			$finder = \XF::finder('XF:Post');
+                    	$post_date = 'DATE(FROM_UNIXTIME(xf_post.post_date)) = CURDATE()';
+                    	$postCount = $finder->with('Thread')
+                    			    ->whereSql($post_date)
+                    			    ->where('Thread.node_id', '!=', $forum_id)
+                    			    ->fetch()
+                    			    ->count();
                     				
                     	/* Check if [UW] Forum Comments System is installed */
                     	$addons = \XF::app()->container('addon.cache');
