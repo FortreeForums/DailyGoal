@@ -133,18 +133,10 @@ class Counter
 		if(!$options->apDgDisablePostGoal)
 		{
 			// Submit the total to xf_ap_daily_goal_history
+			$goal = $options->apDgPostGoal;
 			$total = $simpleCache['apathy/DailyGoal']['count'];
 			
-			if($total >= $options->apDgPostGoal)
-			{
-				$fulfilled = 1;
-			}
-			else
-			{
-				$fulfilled = 0;
-			}
-			
-			$goal = $options->apDgPostGoal;
+			$fulfilled = $total >= $goal ? 1 : 0;
 			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
 				    VALUES (?, ?, ?, ?, ?, ?)',
@@ -196,18 +188,10 @@ class Counter
 		if(!$options->apDgDisableThreadGoal)
 		{
 			// Submit the total to xf_ap_daily_goal_history
+			$goal = $options->apDgThreadGoal;
 			$total = $simpleCache['apathy/DailyGoal']['threadCount'];
 			
-			if($total >= $options->apDgThreadGoal)
-			{
-				$fulfilled = 1;
-			}
-			else
-			{
-				$fulfilled = 0;
-			}
-			
-			$goal = $options->apDgThreadGoal;
+			$fulfilled = $total >= $goal ? 1 : 0;
 			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
 				    VALUES (?, ?, ?, ?, ?, ?)',
@@ -259,18 +243,10 @@ class Counter
 		if(!$options->apDgDisableMemberGoal)
 		{			
 			// Submit the total to xf_ap_daily_goal_history
+			$goal = $options->apDgMemberGoal;
 			$total = $simpleCache['apathy/DailyGoal']['memberCount'];
 			
-			if($total >= $options->apDgMemberGoal)
-			{
-				$fulfilled = 1;
-			}
-			else
-			{
-				$fulfilled = 0;
-			}
-			
-			$goal = $options->apDgMemberGoal;
+			$fulfilled = $total >= $goal ? 1 : 0;
 			
 			$db->query('INSERT INTO xf_ap_daily_goal_history
 				    VALUES (?, ?, ?, ?, ?, ?)',
