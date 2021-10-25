@@ -50,7 +50,7 @@ class Counter
                     			    ->count();
                     				
                     	/* Check if [UW] Forum Comments System is installed */
-                    	$addons = \XF::app()->container('addon.cache');
+                    	$addons = $app->container('addon.cache');
                     	
                     	if(array_key_exists('UW/FCS', $addons) 
 			&& $addons['UW/FCS'] >= 1
@@ -223,7 +223,8 @@ class Counter
 				$threadWeight = $options->apDgAutoAdjustWeightThreads;
 				
 				$threadFinder = \XF::finder('apathy\DailyGoal:History');
-				$threadResult = $threadFinder->where('stats_type', 'thread_goal')->fetch();
+				$threadResult = $threadFinder->where('stats_type', 'thread_goal')
+							     ->fetch();
 				$streak = 0;
 
 				foreach($threadResult as $goal)
