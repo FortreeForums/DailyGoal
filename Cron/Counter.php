@@ -29,8 +29,6 @@ class Counter
 {
 	public static function countPostsFromToday()
 	{
-		$db = \XF::db();
-		$app = \XF::app();
 		$options = \XF::options();
 		$forum_id = $options->apDgExcludedNodesPosts;
 
@@ -41,8 +39,10 @@ class Counter
 
 		if(!$options->apDgDisablePostGoal)
 		{
+			$app = \XF::app();
 			$finder = \XF::finder('XF:Post');
                     	$post_date = 'DATE(FROM_UNIXTIME(xf_post.post_date)) = CURDATE()';
+                    	
                     	$postCount = $finder->with('Thread')
                     			    ->whereSql($post_date)
                     			    ->where('Thread.node_id', '!=', $forum_id)
@@ -58,6 +58,7 @@ class Counter
 			{
                     		$finder = \XF::finder('UW\FCS:Comment');
                     		$comment_date = 'DATE(FROM_UNIXTIME(comment_date)) = CURDATE()';
+                    		
                     		$commentCount = $finder->with('Thread')
                     				       ->whereSql($comment_date)
                     				       ->where('Thread.node_id', '!=', $forum_id)
