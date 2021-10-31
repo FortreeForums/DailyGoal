@@ -26,8 +26,9 @@
 namespace apathy\DailyGoal\Pub\Controller;
 
 use XF\Mvc\Reply\View;
+use XF\Pub\Controller\AbstractController;
 
-class Streaks extends \XF\Pub\Controller\AbstractController
+class Streaks extends AbstractController
 {
 	public static function getActivityDetails(array $activities)
 	{
@@ -51,6 +52,8 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 		$history = $this->finder('apathy\DailyGoal:History');
 		$streakLengths = $this->drawStreakGraph($history->fetch());
 		
+		$goal = $history->limitByPage($page, $perPage)->order('date', 'desc')->fetch();
+		
 		$streakTypes = [
 			'post' => 'Post streak',
 			'thread' => 'Thread streak',
@@ -58,7 +61,7 @@ class Streaks extends \XF\Pub\Controller\AbstractController
 		];
 		
 		$viewParams = [
-			'goal' => $history->limitByPage($page, $perPage)->fetch(),
+			'goal' => $goal,
 			'streakLengths' => $streakLengths,
 			'streakTypes' => $streakTypes,
 			'page' => $page,

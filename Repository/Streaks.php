@@ -63,37 +63,21 @@ class Streaks extends Repository
 		foreach($entity as $goal)
 		{	
 			if($goal['fulfilled'] == 1)
-			{	
-				if($streak == 0
-				&& $streak == $longest['count'])
-				{
-					$longest['startDate'] = $goal['date'];
-				}
-				
-				if($streak >= 1 
-				&& $streak >= $longest['count'])
-				{
-					$longest['endDate'] = $goal['date'];
-				}
-
+			{					
 				$streak++;
-			}
-			elseif($goal['fulfilled'] == 0 && $streak >= $longest['count']) 
-			{		
-				$longest['endDate'] = $goal['date'];		
-				$streak = 0;
 			}
 			elseif($goal['fulfilled'] == 0)
 			{
+				if($streak >= 1 
+				&& $streak >= $longest['count'])
+				{
+					$days = ( $streak * 86400 );
+					$longest['endDate'] = $goal['date'];
+					$longest['startDate'] = ( $longest['endDate'] - $days );
+				}
+				
 				$streak = 0;
-			}
-						
-			if($goal['date'] > $longest['startDate']
-			&& $goal['date'] > $longest['endDate']
-			&& $streak == ( $longest['count'] - $streak ))
-			{
-				$longest['startDate'] = $goal['date'];
-			}
+			}	
 			
 			if($streak > $longest['count'])
 			{
