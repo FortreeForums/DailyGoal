@@ -62,7 +62,7 @@ class Counter
                     				       ->fetch()
                     				       ->count();
                     				       
-                    		$count = ($postCount + $commentCount);
+                    		$count = ( $postCount + $commentCount );
                     	}
                     	else
                     	{
@@ -139,11 +139,11 @@ class Counter
 			
 			if(!$options->apDgDiableAutoAdjustment)
 			{
-				$postTimeframe = $options->apDgAutoAdjustTimeframePosts;
-				$postWeight = $options->apDgAutoAdjustWeightPosts;
+				$timeframe = $options->apDgAutoAdjustTimeframePosts;
+				$weight = $options->apDgAutoAdjustWeightPosts;
 			
-				$postFinder = \XF::finder('apathy\DailyGoal:History');
-				$postResult = $postFinder->where('stats_type', 'post_goal')->fetch();
+				$finder = \XF::finder('apathy\DailyGoal:History');
+				$postResult = $finder->where('stats_type', 'post_goal')->fetch();
 			
 				$streak = 0;
 			
@@ -153,7 +153,7 @@ class Counter
 					{
 						$streak++;
 					}
-
+				
 					if($goal['fulfilled'] == 0)
 					{
 						$streak = 0;
@@ -162,14 +162,16 @@ class Counter
 			
 				$option = \XF::em()->find('XF:Option', 'apDgPostGoal');
 				
-				if($goal['fulfilled'] == 1 && $streak >= $postTimeframe)
+				if($goal['fulfilled'] == 1 && $streak >= $timeframe)
 				{
-					$option->option_value = ( $goal + $postWeight );
+					$goal = $options->apDgPostGoal;
+					$option->option_value = ( $goal + $weight );
 				}
 				
-				elseif($goal['fulfilled'] == 0 && $streak <= $postTimeframe)
+				elseif($goal['fulfilled'] == 0 && $streak <= $timeframe)
 				{
-					$option->option_value = ( $goal - $postWeight );
+					$goal = $options->apDgPostGoal;
+					$option->option_value = ( $goal - $weight );
 				}
 			
 				$option->save();
@@ -191,12 +193,11 @@ class Counter
 			
 			if(!$options->apDgDiableAutoAdjustment)
 			{
-				$threadTimeframe = $options->apDgAutoAdjustTimeframeThreads;
-				$threadWeight = $options->apDgAutoAdjustWeightThreads;
+				$timeframe = $options->apDgAutoAdjustTimeframeThreads;
+				$weight = $options->apDgAutoAdjustWeightThreads;
 				
-				$threadFinder = \XF::finder('apathy\DailyGoal:History');
-				$threadResult = $threadFinder->where('stats_type', 'thread_goal')
-							     ->fetch();
+				$finder = \XF::finder('apathy\DailyGoal:History');
+				$threadResult = $finder->where('stats_type', 'thread_goal')->fetch();
 				$streak = 0;
 
 				foreach($threadResult as $goal)
@@ -214,14 +215,16 @@ class Counter
 			
 				$option = \XF::em()->find('XF:Option', 'apDgThreadGoal');
 				
-				if($goal['fulfilled'] == 1 && $streak >= $threadTimeframe)
+				if($goal['fulfilled'] == 1 && $streak >= $timeframe)
 				{
-					$option->option_value = ( $goal + $threadWeight );
+					$goal = $options->apDgThreadGoal;
+					$option->option_value = ( $goal + $weight );
 				}
 				
-				elseif($goal['fulfilled'] == 0 && $streak <= $threadTimeframe)
+				elseif($goal['fulfilled'] == 0 && $streak <= $timeframe)
 				{
-					$option->option_value = ( $goal - $threadWeight );
+					$goal = $options->apDgThreadGoal;
+					$option->option_value = ( $goal - $weight );
 				}
 			
 				$option->save();
@@ -243,12 +246,11 @@ class Counter
 			
 			if(!$options->apDgDiableAutoAdjustment)
 			{
-				$memberTimeframe = $options->apDgAutoAdjustTimeframeMembers;
-				$memberWeight = $options->apDgAutoAdjustWeightMembers;
+				$timeframe = $options->apDgAutoAdjustTimeframeMembers;
+				$weight = $options->apDgAutoAdjustWeightMembers;
 			
-				$memberFinder = \XF::finder('apathy\DailyGoal:History');
-				$memberResult = $memberFinder->where('stats_type', 'member_goal')
-							     ->fetch();
+				$finder = \XF::finder('apathy\DailyGoal:History');
+				$memberResult = $finder->where('stats_type', 'member_goal')->fetch();
 				$streak = 0;
 			
 				foreach($memberResult as $goal)
@@ -266,13 +268,15 @@ class Counter
 			
 				$option = \XF::em()->find('XF:Option', 'apDgMemberGoal');
 				
-				if($goal['fulfilled'] == 1 && $streak >= $memberTimeframe)
+				if($goal['fulfilled'] == 1 && $streak >= $timeframe)
 				{
-					$option->option_value = ( $goal + $memberWeight );
+					$goal = $options->apDgMemberGoal;
+					$option->option_value = ( $goal + $weight );
 				}
-				elseif($goal['fulfilled'] == 0 && $streak <= $memberTimeframe)
+				elseif($goal['fulfilled'] == 0 && $streak <= $timeframe)
 				{
-					$option->option_value = ( $goal - $memberWeight );
+					$goal = $options->apDgMemberGoal;
+					$option->option_value = ( $goal - $weight );
 				}
 			
 				$option->save();

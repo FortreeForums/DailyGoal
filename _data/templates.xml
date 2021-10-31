@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
-  <template type="public" title="ap_dg_member_streak_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<div class="block block--progress" {{ widget_data($widget) }}>
+  <template type="public" title="ap_dg_member_streak_widget" version_id="1060130" version_string="1.6.1 Beta"><![CDATA[<xf:css src="ap_dg_streaks.less" />
+
+<div class="block block--progress" {{ widget_data($widget) }}>
    	<div class="block-container">
        	<h3 class="block-minorHeader">{{ phrase('ap_dg_member_streak') }}</h3>
 		<xf:if is="!$xf.options.apDgDisableMemberGoal">
@@ -8,7 +10,9 @@
 		</xf:if>
     </div>
 </div>]]></template>
-  <template type="public" title="ap_dg_post_streak_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<div class="block block--progress" {{ widget_data($widget) }}>
+  <template type="public" title="ap_dg_post_streak_widget" version_id="1060130" version_string="1.6.1 Beta"><![CDATA[<xf:css src="ap_dg_streaks.less" />
+
+<div class="block block--progress" {{ widget_data($widget) }}>
    	<div class="block-container">
        	<h3 class="block-minorHeader">{{ phrase('ap_dg_post_streak') }}</h3>
 		<xf:if is="!$xf.options.apDgDisablePostGoal">
@@ -60,7 +64,7 @@
         margin-top: @xf-paddingLarge;
     }
 }]]></template>
-  <template type="public" title="ap_dg_streak_macros" version_id="1060070" version_string="1.6.0"><![CDATA[<xf:macro name="ap_dg_streak" arg-type="" arg-goalType="">
+  <template type="public" title="ap_dg_streak_macros" version_id="1060130" version_string="1.6.1 Beta"><![CDATA[<xf:macro name="ap_dg_streak" arg-type="" arg-goalType="">
 	<div class="ap-dg-streaks--item block-row">
 		<div class="ap-dg-streaks--block contentRow" align="center">
 			<div class="ap-dg-streaks--main">
@@ -96,7 +100,11 @@
 				<div class="contentRow-header">
 					<span class="title">
 						<xf:set var="$startDate" value="{{ date($type.startDate, 'F j, Y') }}" />
-						{$startDate}
+						<xf:if is="$type.count == 0">
+							{{ phrase('n_a') }}
+						<xf:else />
+							{$startDate}
+						</xf:if>
 					</span>
 				</div>
 			</div>
@@ -110,8 +118,10 @@
 				</div>
 				<div class="contentRow-header">
 					<span class="title">
-						<xf:if is="$type.last >= 1">
+						<xf:if is="$type.last >= $type.count && $type.count != 0">
 							{{ phrase('ap_dg_ongoing') }}
+						<xf:elseif is="$type.count == 0" />
+							{{ phrase('n_a') }}
 						<xf:else />
 							<xf:set var="$endDate" value="{{ date($type.endDate, 'F j, Y') }}" />
 							{$endDate}
@@ -299,7 +309,9 @@
 		}
 	}
 }]]></template>
-  <template type="public" title="ap_dg_thread_streak_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<div class="block block--progress" {{ widget_data($widget) }}>
+  <template type="public" title="ap_dg_thread_streak_widget" version_id="1060130" version_string="1.6.1 Beta"><![CDATA[<xf:css src="ap_dg_streaks.less" />
+
+<div class="block block--progress" {{ widget_data($widget) }}>
    	<div class="block-container">
        	<h3 class="block-minorHeader">{{ phrase('ap_dg_thread_streak') }}</h3>
 		<xf:if is="!$xf.options.apDgDisableThreadGoal">
@@ -307,7 +319,9 @@
 		</xf:if>
     </div>
 </div>]]></template>
-  <template type="public" title="ap_dg_total_streaks_widget" version_id="1060070" version_string="1.6.0"><![CDATA[<div class="block block--progress" {{ widget_data($widget) }}>
+  <template type="public" title="ap_dg_total_streaks_widget" version_id="1060130" version_string="1.6.1 Beta"><![CDATA[<xf:css src="ap_dg_streaks.less" />
+
+<div class="block block--progress" {{ widget_data($widget) }}>
    	<div class="block-container">
        	<h3 class="block-minorHeader">{{ phrase('ap_dg_total_streaks') }}</h3>
 		<xf:if is="!$xf.options.apDgDisablePostGoal">

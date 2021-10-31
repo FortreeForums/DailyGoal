@@ -26,7 +26,7 @@
 namespace apathy\DailyGoal\Pub\Controller;
 
 use XF\Mvc\Reply\View;
-use \XF\Pub\Controller\AbstractController;
+use XF\Pub\Controller\AbstractController;
 
 class Streaks extends AbstractController
 {
