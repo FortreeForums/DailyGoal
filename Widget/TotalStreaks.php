@@ -44,10 +44,11 @@ class TotalStreaks extends AbstractWidget
 		$streak = 0;
 		$postTotal = 0;
 		$postGoalsMet = 0;
+		$timeframe = $options->apDgAutoAdjustTimeframePosts;
 		
 		foreach($posts as $goal)
 		{
-			if($goal['fulfilled'] && $i == 1)
+			if($goal['fulfilled'] && $i == $timeframe)
 			{
 				$streak++;
 			}
@@ -79,10 +80,11 @@ class TotalStreaks extends AbstractWidget
 		$streak = 0;
 		$threadTotal = 0;
 		$threadGoalsMet = 0;
+		$timeframe = $options->apDgAutoAdjustTimeframeThreads;
 		
 		foreach($threads as $goal)
 		{		
-			if($goal['fulfilled'] && $i == 1)
+			if($goal['fulfilled'] && $i == $timeframe)
 			{
 				$streak++;
 			}
@@ -114,10 +116,11 @@ class TotalStreaks extends AbstractWidget
 		$streak = 0;
 		$memberTotal = 0;
 		$memberGoalsMet = 0;
+		$timeframe = $options->apDgAutoAdjustTimeframeMembers;
 		
 		foreach($members as $goal)
 		{		
-			if($goal['fulfilled'] && $i == 1)
+			if($goal['fulfilled'] && $i == $timeframe)
 			{
 				$streak++;
 			}
